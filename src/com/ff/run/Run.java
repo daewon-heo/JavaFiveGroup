@@ -7,7 +7,7 @@ import develop.Develop;
 public class Run {
 
 	public static void main(String[] args) {
-		new  MainController();
+		new  MainController().showView();
 //		System.out.println("첫번째 팀 프로젝트");
 //		new Develop().test();
 	}

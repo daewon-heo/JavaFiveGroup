@@ -6,6 +6,10 @@ public class MainController {
 	MainView mainView = null;
 	
 	public MainController(){
+		
+	}
+	
+	public void showView() {
 		mainView = new MainView();
 	}
 }

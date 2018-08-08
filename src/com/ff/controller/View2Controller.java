@@ -6,6 +6,10 @@ public class View2Controller {
 	View2View view2View = null;
 	
 	public View2Controller(){
-		view2View = View2View.getInstance();
+
+	}
+	
+	public void viewShow() {
+		view2View = new View2View();
 	}
 }

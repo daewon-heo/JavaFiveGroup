@@ -9,19 +9,17 @@ public class Run {
 		int year = 1960;
 		String obs = "07";
 		Map<String, String> awsMap = Weather.GetCurrentWeather(stn);
+		System.out.println(awsMap);
 		System.out.println("현재 기온 : " + awsMap.get("기온"));
 		
-		
-//
-//		boolean check = Weather.CheckParameter(stn, year, obs);
-		String[][] cal = null;
-		cal = Weather.GetPastWeather(stn, year, obs);
+		String[][] pastWeather = null;
+		pastWeather = Weather.GetPastWeather(stn, year, obs);
 
-		if (cal != null) {
+		if (pastWeather != null) {
 
-			for (int i = 0; i < cal.length; i++) {
-				for (int j = 0; j < cal[0].length; j++) {
-					System.out.print(cal[i][j] + "\t");
+			for (int i = 0; i < pastWeather.length; i++) {
+				for (int j = 0; j < pastWeather[0].length; j++) {
+					System.out.print(pastWeather[i][j] + "\t");
 				}
 				System.out.println();
 			}

@@ -12,51 +12,73 @@ import com.ff.controller.View2Controller;
 import com.ff.controller.View3Controller;
 
 public class MainView extends JFrame {
-
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2153902511546168300L;
-
+	
+	JButton btn1 = null;
+	JButton btn2 = null;
+	JButton btn3 = null;
+	
+	View1Controller view1Controller = null;
+	View2Controller view2Controller = null;
+	View3Controller view3Controller = null;
+	
 	public MainView(){
 		super("메인화면");
+		init();
+	}
+	
+	public void init() {
+		initView();
+		addListener();
+		addComponent();
+	}
+	
+	public void initView() {
 		setBounds(200, 200, 300, 300);
 		setLayout(new GridLayout());
-		JButton btn1 = new JButton("화면1");
-		btn1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new View1Controller();
-			}
-		});
-		add(btn1);
 		
-		
-		JButton btn2 = new JButton("화면2");
-		btn2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new View2Controller();
-			}
-		});
-		add(btn2);
-		
-		JButton btn3 = new JButton("화면3");
-		btn3.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new View3Controller();
-			}
-		});
-		add(btn3);
+		btn1 = new JButton("화면1");
+		btn2 = new JButton("화면2");
+		btn3 = new JButton("화면3");
 		
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	
+	public void addListener() {
+		btn1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view1Controller = new View1Controller();
+				view1Controller.viewShow();
+			}
+		});
+		
+		btn2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view2Controller = new View2Controller();
+				view2Controller.viewShow();
+			}
+		});
+		
+		btn3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view3Controller = new View3Controller();
+				view3Controller.viewShow();
+			}
+		});
+	}
+	
+	public void addComponent() {
+		add(btn1);
+		add(btn2);
+		add(btn3);
+	}
 }
