@@ -17,9 +17,9 @@ public class View3View extends JFrame {
 	}
 	
 	public void initView() {
-		setBounds(300, 300, 300, 300);
+		setBounds(300, 300, 500, 500);
 		setLayout(new GridLayout());
-		setResizable(false);
+//		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
