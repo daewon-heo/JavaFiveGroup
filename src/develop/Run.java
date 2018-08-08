@@ -1,18 +1,21 @@
 package develop;
 
+import java.util.Map;
+
 public class Run {
 
 	public static void main(String[] args) {
 		String stn = "108";
-		int year = 2017;
+		int year = 1960;
 		String obs = "07";
-		Weather.GetCurrentWeather();
-
-		boolean check = Weather.CheckParameter(stn, year, obs);
+		Map<String, String> awsMap = Weather.GetCurrentWeather(stn);
+		System.out.println("현재 기온 : " + awsMap.get("기온"));
+		
+		
+//
+//		boolean check = Weather.CheckParameter(stn, year, obs);
 		String[][] cal = null;
-		if (check) {
-			cal = Weather.GetPastWeather(stn, year, obs);
-		}
+		cal = Weather.GetPastWeather(stn, year, obs);
 
 		if (cal != null) {
 
@@ -22,6 +25,8 @@ public class Run {
 				}
 				System.out.println();
 			}
+		}else {
+			System.out.println("파라미터를 확인하세요");
 		}
 		System.out.println("프로그램 종료");
 	}
