@@ -6,14 +6,14 @@ public class Run {
 		String stn = "108";
 		int year = 2018;
 		String obs = "07";
-		Weather.GetCurrentWeather();
+//		Weather.GetCurrentWeather();
 
-//		boolean check = Weather.CheckParameter(stn, year, obs);
-//		String[][] cal = null;
-//		if (check) {
-//			cal = Weather.GetPastWeather(stn, year, obs);
-//		}
-//
+		boolean check = Weather.CheckParameter(stn, year, obs);
+		String[][] cal = null;
+		if (check) {
+			cal = Weather.GetPastWeather(stn, year, obs);
+		}
+
 //		if (cal != null) {
 //
 //			for (int i = 0; i < cal.length; i++) {
@@ -23,6 +23,6 @@ public class Run {
 //				System.out.println();
 //			}
 //		}
-//		System.out.println("프로그램 종료");
+		System.out.println("프로그램 종료");
 	}
 }

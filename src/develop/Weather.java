@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Weather {
@@ -116,6 +117,8 @@ public class Weather {
 //    <option value="189">서귀포(무)</option>
 //    <option value="188">성산(무)</option>
 
+	
+	
 	// table_develop
 //	<select name="obs" id="observation_select3" class="wid85">
 
@@ -194,6 +197,16 @@ public class Weather {
 			parameters += "&obs=" + obs;
 
 			Document doc = Jsoup.connect(URL + parameters).get();
+
+			//			Elements names = doc.select("[name=viewform]").select("select").get(0).select("option");
+//			
+//			System.out.print("{");
+//			for(Element el : names){
+//				if(!el.val().equals(""))
+//					System.out.print("\"" + el.val() + "\",");
+//			}
+//			System.out.print("}");
+			
 			Elements table = doc.select(".table_develop").select("tbody");
 			Elements rows = table.get(0).select("tr");
 
@@ -232,7 +245,7 @@ public class Weather {
 		boolean result = false;
 
 		String[] obsArr = { "06", "07", "08", "10", "12", "21", "28", "35", "59", "90" };
-		String[] strArr = { "108", "102" };
+		String[] stnArr = {"108","102","98","99","112","119","201","202","203","93","95","101","114","121","211","212","104","115","105","90","100","106","216","217","131","127","135","221","226","177","133","129","232","235","236","238","146","140","243","244","245","247","248","254","172","251","156","165","169","168","170","175","268","252","174","256","260","261","262","259","258","266","136","138","143","176","130","137","271","272","273","277","278","279","281","276","283","159","152","155","255","162","192","284","285","288","289","294","295","253","257","263","264","184","185","189","188"};
 
 		Calendar cal = new GregorianCalendar();
 		int curYear = cal.get(Calendar.YEAR);
@@ -253,8 +266,8 @@ public class Weather {
 
 		if (result) {
 			result = false;
-			for (int i = 0; i < strArr.length; i++) {
-				if (strArr[i].equals(stn)) {
+			for (int i = 0; i < stnArr.length; i++) {
+				if (stnArr[i].equals(stn)) {
 					result = true;
 					break;
 				}
