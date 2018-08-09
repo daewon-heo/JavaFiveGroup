@@ -6,6 +6,7 @@ public class View1Controller {
 	View1View view1View = null;
 	
 	public View1Controller(){
+		
 	}
 	
 	public void viewShow() {

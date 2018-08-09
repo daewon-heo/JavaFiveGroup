@@ -9,7 +9,7 @@ public class MainController {
 		
 	}
 	
-	public void showView() {
+	public void viewShow() {
 		mainView = new MainView();
 	}
 }
