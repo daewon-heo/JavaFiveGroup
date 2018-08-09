@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 import com.ff.controller.PastWeatherController;
 import com.ff.controller.TodayStyleController;
-import com.ff.controller.View3Controller;
+import com.ff.controller.SpecificDateController;
 
 public class MainView extends JFrame {
 	
@@ -24,7 +24,7 @@ public class MainView extends JFrame {
 	
 	PastWeatherController view1Controller = null;
 	TodayStyleController view2Controller = null;
-	View3Controller view3Controller = null;
+	SpecificDateController view3Controller = null;
 	
 	public MainView(){
 		super("메인화면");
@@ -70,7 +70,7 @@ public class MainView extends JFrame {
 		btn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				view3Controller = new View3Controller();
+				view3Controller = new SpecificDateController();
 				view3Controller.viewShow();
 			}
 		});

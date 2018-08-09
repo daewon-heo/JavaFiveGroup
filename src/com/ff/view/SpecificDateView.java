@@ -4,14 +4,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
-public class View3View extends JFrame {
+public class SpecificDateView extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1114497684814447320L;
 
-	public View3View(){
+	public SpecificDateView(){
 		super("세번째 화면");
 		initView();
 	}
