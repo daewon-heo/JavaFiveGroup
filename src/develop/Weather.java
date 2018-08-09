@@ -111,16 +111,23 @@ public class Weather {
 	 * @return String[][];
 	 */
 	public static String[][] GetPastWeather(String stn, int year, String obs) {
-		String[][] wheahers = null;
-		String serviceKey = "mxSeDzkLZPTloPLw9fu7PD5G62hSG92WD7NKwFOIs0QnrmQCUHaFtpOTlFzVTAvZ60Efsm22b%2Fhdm9tk66TT7g%3D%3D";
+		int wRows = 33;
+		int wCols = 13;
+		
+		if(obs.equals("90"))
+			wRows = 32;
+		
+		String[][] weathers = null;
+		final String SERVICE_Key = "mxSeDzkLZPTloPLw9fu7PD5G62hSG92WD7NKwFOIs0QnrmQCUHaFtpOTlFzVTAvZ60Efsm22b%2Fhdm9tk66TT7g%3D%3D";
 
 		if (CheckParameter(stn, year, obs)) {
 			try {
 				StringBuilder urlBuilder = new StringBuilder("htt"); /* URL */
-				urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey);
+				urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + SERVICE_Key);
 				urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "="
 						+ URLEncoder.encode("-", "UTF-8")); /* 공공데이터포털에서 받은 인증키 */
-				wheahers = new String[33][13];
+				
+				weathers = new String[wRows][wCols];
 				final String URL = "http://www.weather.go.kr/weather/climate/past_table.jsp?";
 				String parameters = null;
 
@@ -143,27 +150,27 @@ public class Weather {
 				Elements table = doc.select(".table_develop").select("tbody");
 				Elements rows = table.get(0).select("tr");
 
-				for (int i = 0; i < 13; i++) {
+				for (int i = 0; i < weathers[0].length; i++) {
 					if (i != 0)
-						wheahers[0][i] = i + "월";
+						weathers[0][i] = i + "월";
 					else
-						wheahers[0][i] = "";
+						weathers[0][i] = "";
 				}
 
-				for (int i = 0; i < 32; i++) {
+				for (int i = 0; i < weathers.length-1; i++) {
 					Elements cols = rows.get(i).select("td");
-					for (int j = 0; j < 13; j++) {
+					for (int j = 0; j < weathers[0].length; j++) {
 						if (cols.get(j).text().equals("")) {
-							wheahers[i + 1][j] = null;
+							weathers[i + 1][j] = null;
 						} else {
-							wheahers[i + 1][j] = cols.get(j).text();
+							weathers[i + 1][j] = cols.get(j).text();
 						}
 					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return wheahers;
+			return weathers;
 		} else {
 			return null;
 		}
