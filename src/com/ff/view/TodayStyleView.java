@@ -4,14 +4,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
-public class View2View extends JFrame {
+public class TodayStyleView extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 181983372302562901L;
 	
-	public View2View(){
+	public TodayStyleView(){
 		super("두번째 화면");
 		initView();
 	}
