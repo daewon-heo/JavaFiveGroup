@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import com.ff.controller.View1Controller;
+import com.ff.controller.PastWeatherController;
 import com.ff.controller.View2Controller;
 import com.ff.controller.View3Controller;
 
@@ -22,7 +22,7 @@ public class MainView extends JFrame {
 	JButton btn2 = null;
 	JButton btn3 = null;
 	
-	View1Controller view1Controller = null;
+	PastWeatherController view1Controller = null;
 	View2Controller view2Controller = null;
 	View3Controller view3Controller = null;
 	
@@ -54,7 +54,7 @@ public class MainView extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				view1Controller = new View1Controller();
+				view1Controller = new PastWeatherController();
 				view1Controller.viewShow();
 			}
 		});

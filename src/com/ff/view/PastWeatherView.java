@@ -4,14 +4,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
-public class View1View extends JFrame {
+public class PastWeatherView extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5581181417128426852L;
 
-	public View1View(){
+	public PastWeatherView(){
 		super("첫번째 화면");
 		initView();
 	}
