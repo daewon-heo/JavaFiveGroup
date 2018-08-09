@@ -6,8 +6,8 @@ public class Run {
 
 	public static void main(String[] args) {
 		String stn = "108";
-		int year = 1960;
-		String obs = "07";
+		int year = 2018;
+		String obs = "21";
 		Map<String, String> awsMap = Weather.GetCurrentWeather(stn);
 		System.out.println(awsMap);
 		System.out.println("현재 기온 : " + awsMap.get("기온"));
