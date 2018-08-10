@@ -38,7 +38,7 @@ public class TodayStyleView extends JFrame {
 		setBounds(500, 200, 500, 500);
 		setSize(450, 800);
 		setLocationRelativeTo(null);
-		setLayout(new GridLayout());
+		//setLayout(new GridLayout());
 //		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -1,5 +1,6 @@
 package com.ff.view;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -123,6 +124,15 @@ public class TodayStyle2View extends JFrame {
 		    Image myPicture9 = new ImageIcon(path +  "9" +".jpg").getImage().getScaledInstance(150, 260, 0);
 
 		    
+		    btn1.setBackground(Color.WHITE);
+		    btn2.setBackground(Color.WHITE);
+		    btn3.setBackground(Color.WHITE);
+		    btn4.setBackground(Color.WHITE);
+		    btn5.setBackground(Color.WHITE);
+		    btn6.setBackground(Color.WHITE);
+		    btn7.setBackground(Color.WHITE);
+		    btn8.setBackground(Color.WHITE);
+		    btn9.setBackground(Color.WHITE);
 		    
 		    btn1.setIcon(new ImageIcon(myPicture1));
 		    btn2.setIcon(new ImageIcon(myPicture2));
