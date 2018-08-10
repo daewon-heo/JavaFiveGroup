@@ -19,15 +19,21 @@ public class PastWeatherController {
 		Calendar cal = new GregorianCalendar();
 		
 		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) -1;
+		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
+		
+		
 		
 		String[][] datas = Weather.GetPastWeather("108", year-1, "90");
 		
-		weatherIcon(weather(datas[day][month]));
+		System.out.println("년 : " + (year-1));
+		System.out.println("day : " + day + " month : " + month);
 		
-		int weather = 0; // 에러 방지를 위한 임시방편
-		view1View = new PastWeatherView(weather);
+		int num = weather(datas[day][month]);
+		
+		String str = weatherIcon(num);
+		
+		view1View = new PastWeatherView(str);
 	}
 	
 	public String compareTemperature(){
@@ -78,7 +84,28 @@ public class PastWeatherController {
 	}
 	
 	public int weather(String temp){
-		
-		return 0;
+		int result = 0;
+
+		if (temp == null) {
+			result = 10;
+		} else {
+			String[] str = temp.split(" ");
+
+			for (int i = 0; i < str.length; i++) {
+				System.out.println(str[i]);
+				if (str[i].equals("비") || str[i].equals("소나기")) {
+					result = 4;
+					break;
+				} else if (str[i].equals("햇무리")) {
+					result = 10;
+				} else if (str[i].equals("눈")) {
+					result = 7;
+				} else {
+					result = 1;
+				}
+			}
+		}
+
+		return result;
 	}
 }

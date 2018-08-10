@@ -23,12 +23,12 @@ public class PastWeatherView extends JFrame {
 	 */
 	private static final long serialVersionUID = -5581181417128426852L;
 
-	public PastWeatherView(int weather){
+	public PastWeatherView(String str){
 		super("작년의 오늘 날씨와 현재 날씨");
-		initView(weather);
+		initView(str);
 	}
 	
-	public void initView(int weather) {
+	public void initView(String str) {
 		
 		PastWeatherController pwc = new PastWeatherController();
 		
@@ -50,7 +50,7 @@ public class PastWeatherView extends JFrame {
 		JLabel lb2 = new JLabel("현재 날씨");
 		JLabel lb3 = new JLabel(pwc.compareTemperature());
 		
-		Image myImg = new ImageIcon(pwc.weatherIcon(weather)).getImage()
+		Image myImg = new ImageIcon(str).getImage()
 				.getScaledInstance(180, 180, 0);
 		
 		JLabel wLb1 = new JLabel(new ImageIcon(myImg));
