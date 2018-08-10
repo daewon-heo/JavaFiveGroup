@@ -85,6 +85,7 @@ public class Weather {
 				awsMap.put("1분평균풍속", el.select("ws1M").text()); // 1분 평균 풍속(ws1M)
 				awsMap.put("일강수량", el.select("rnDay").text()); // 일강수량(rnDay)
 				awsMap.put("aws시간", el.select("awsDt").text()); //aws시간(awsDt)
+				awsMap.put("습도", el.select("hm").text()); //aws시간(awsDt)
 			} catch (Exception e) {
 				System.out.println(e.toString());
 				return null;
