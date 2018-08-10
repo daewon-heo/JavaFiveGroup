@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.ff.controller.TodayStyle2Controller;
+import com.ff.controller.TodayStyleController;
 
 public class TodayStyleView extends JFrame {
 
@@ -21,6 +22,7 @@ public class TodayStyleView extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 181983372302562901L;
+	private TodayStyleController tsc = new TodayStyleController();
 	
 	public TodayStyleView(String fileName){
 		super("이런 스타일 어때요?");
@@ -47,9 +49,35 @@ public class TodayStyleView extends JFrame {
 		JLabel lb = new JLabel(new ImageIcon(fileName));
 		lb.setLocation(0, 0);
 		lb.setSize(450, 800);
-//	
 		pan.add(lb);
+		
+		pan.setLayout(null);
+		
+//	
+		JLabel temper = new JLabel();
+		temper.setText(tsc.getNowTem()+"℃");
+		JLabel region = new JLabel();
+		region.setText(tsc.getRegion());
+		JLabel today = new JLabel();
+		today.setText(tsc.getToday());
+		JLabel high = new JLabel();
+		high.setText(tsc.getHigh());
+		JLabel low = new JLabel();
+		low.setText(tsc.getLow());
+		
+	
+		
+		pan.add(temper);
+		pan.add(region);
+		pan.add(today);
+		pan.add(high);
+		pan.add(low);
+		
+		
 		add(pan);
+		
+		
+		
 		
 		pan.setLayout(null);
 		
@@ -64,6 +92,7 @@ public class TodayStyleView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new TodayStyle2View();
+				//new TodayStyleController().weather();
 				
 			}
 			
