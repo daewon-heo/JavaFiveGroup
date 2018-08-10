@@ -22,7 +22,7 @@ public class MainController {
 	private String day;
 	private String iconName;
 	
-/*	public MainController(){
+	/*public MainController(){
 		cal = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재시간
 		SimpleDateFormat wday = new SimpleDateFormat("E요일");
@@ -31,6 +31,10 @@ public class MainController {
 	}*/
 	
 	public MainController(){
+
+	}
+	
+	public void getDatas(){
 		iconName = "sun";
 		cal = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재 시간
@@ -47,9 +51,8 @@ public class MainController {
 		System.out.println(cal.get(Calendar.DATE) +",,"+ ((cal.get(Calendar.MONTH))+1) );
 		System.out.println("기온" +  nowTem);
 		humidity = Weather.GetPastWeather("108", cal.getWeekYear(), "12")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
-		
-		
 	}
+	
 	
 	public String getIconName(){
 		if(rain == true){
@@ -147,5 +150,6 @@ public class MainController {
 
 	public void viewShow() {
 		mainView = new MainView();
+		
 	}
 }

@@ -3,7 +3,6 @@ package com.ff.view;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,13 +16,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import com.ff.controller.MainController;
 import com.ff.controller.PastWeatherController;
 import com.ff.controller.SpecificDateController;
 import com.ff.controller.TodayStyleController;
 import com.ff.model.CommonStatic;
+
+import develop.TestLoading;
+import develop.Weather;
 
 public class MainView extends JFrame {
 	
@@ -37,7 +38,7 @@ public class MainView extends JFrame {
 	JButton btn3 = null;
 	
 	JFrame jf = new JFrame();
-	
+	JLabel loadingLabel = null;
 	MainController mc = new MainController();
 	
 	PastWeatherController view1Controller = null;
@@ -46,11 +47,34 @@ public class MainView extends JFrame {
 	
 	public MainView(){
 		super("날씨 봐라");
+		loadingView();
+		
 		init();
+		
+		
+		String[][] str = getPastWeather();	// 과거 날씨 데이터 가져오기
 	}
 	
+	
+	public String[][] getPastWeather(){
+		String[][] pastWeather = Weather.GetPastWeather("108", 2018, "08");
+		return pastWeather;
+	}
+	
+	public void loadingView(){
+    	
+	}
+	
+
 	public void init() {
-		
+		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
+    	loadingLabel = new JLabel(imageIcon);
+    	add(loadingLabel);
+    	JLabel lb = new JLabel();
+    	setBounds(500, 250, 700, 600);
+    	setVisible(true);
+    	
+		mc.getDatas();
 		setLayout(null);
 		backGrounImg1();
 		
@@ -120,8 +144,12 @@ public class MainView extends JFrame {
         lowTem.setText(mc.getLow()+ "℃");
         lowTem.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         
+        // 상대 습도
+        JLabel humidity = new JLabel("최고온도");
+        humidity.setText(mc.getHumidity());
+        
         // 메인 아이콘
-        Image mainImage = new ImageIcon("datas/images/"+ /*mc.getIconName()+*/"sun.png").getImage().getScaledInstance(300, 300, 0);
+        Image mainImage = new ImageIcon("datas/images/"+ mc.getIconName()+".png").getImage().getScaledInstance(300, 300, 0);
         JLabel mainIcon = new JLabel(new ImageIcon(mainImage));
        
        
@@ -191,6 +219,7 @@ public class MainView extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				view1Controller = new PastWeatherController();
 				view1Controller.viewShow();
 			}
