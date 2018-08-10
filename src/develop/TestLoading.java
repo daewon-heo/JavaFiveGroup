@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import com.ff.model.CommonStatic;
 
@@ -19,18 +21,18 @@ public class TestLoading extends JFrame {
 
 	JLabel loadingLabel = null;
 	
-	
 	public TestLoading(){
+		super("로딩 화면 테스트");
 		loadingView();        	// 로딩 이미지 추가
 		initView();				// View 초기화
 	
 		String[][] str = getPastWeather();	// 과거 날씨 데이터 가져오기
 
 		remove(loadingLabel);
-		repaint();
+		repaint();				// 다시 그리기
 		
 		dataView(str);
-		revalidate();
+		validate();			// 다시 그리기
 	}
 	
 	/**
@@ -56,17 +58,18 @@ public class TestLoading extends JFrame {
 	 * 데이터를 받아서 그리는 뷰
 	 */
 	public void dataView(String[][] pastWeather){
-		JPanel pan = new JPanel();
-		JLabel label = null;
-		for (int i = 0; i < pastWeather.length; i++) {
+		String[][] editWeather = new String[pastWeather.length-1][pastWeather[0].length];
+		
+		for (int i = 1; i < pastWeather.length; i++) {
 			for (int j = 0; j < pastWeather[0].length; j++) {
-				if(pastWeather[i][j] != null)
-					pan.add(new Label(pastWeather[i][j].toString()));
-				else
-					pan.add(new Label("null"));
+				editWeather[i-1][j] = pastWeather[i][j];
 			}
 		}
-		add(pan);
+		
+		JTable wTable = new JTable(editWeather, pastWeather[0]);
+		JScrollPane scroll = new JScrollPane(wTable);
+		add(scroll);
+		pack();
 	}
 	
 	public String[][] getPastWeather(){
