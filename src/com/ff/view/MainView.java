@@ -11,17 +11,20 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import com.ff.controller.MainController;
 import com.ff.controller.PastWeatherController;
 import com.ff.controller.SpecificDateController;
 import com.ff.controller.TodayStyleController;
 import com.ff.model.CommonStatic;
+
 public class MainView extends JFrame {
 	
 	/**
@@ -49,11 +52,38 @@ public class MainView extends JFrame {
 	public void init() {
 		
 		setLayout(null);
-		backGrounImg1();
-
-		Image backg = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG).getImage().getScaledInstance(700, 600, 50);
-		JLabel backgr = new JLabel(new ImageIcon(backg));
+		//backGrounImg1();
 		
+		ImageIcon icon = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG);
+		
+		
+		JPanel background = new JPanel() {
+            public void paintComponent(Graphics g) {
+                // Approach 1: Dispaly image at at full size
+                g.drawImage(icon.getImage(), 0, 0, null);
+                // Approach 2: Scale image to size of component
+                // Dimension d = getSize();
+                //g.drawImage(icon.getImage(), 0, 0, 700, 600, null);
+                // Approach 3: Fix the image position in the scroll pane
+                // Point p = scrollPane.getViewport().getViewPosition();
+                // g.drawImage(icon.getImage(), p.x, p.y, null);
+                setOpaque(false); //그림을 표시하게 설정,투명하게 조절
+                super.paintComponent(g);
+            }
+        };
+        
+        
+        
+		try {
+			this.setIconImage(ImageIO.read(new File("datas/images/S_cloudy.png")));
+		} catch (IOException e1) {
+			System.out.println("이미지파일 오류 발생");
+		}
+
+		
+		
+		
+		Image backg = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG).getImage().getScaledInstance(700, 600, 50);
         Image myImg = new ImageIcon("datas/images/menu.png").getImage().getScaledInstance(50, 50, 0);
         
         // 메뉴 버튼
@@ -64,6 +94,8 @@ public class MainView extends JFrame {
         menu.setSize(60, 60);
         menu.setFocusPainted(false); 
         menu.setContentAreaFilled(false);
+       
+        
         
         // 날짜
         JLabel today = new JLabel();
@@ -96,7 +128,7 @@ public class MainView extends JFrame {
         // 메인 아이콘
         Image mainImage = new ImageIcon("datas/images/"+ /*mc.getIconName()+*/"sun.png").getImage().getScaledInstance(300, 300, 0);
         JLabel mainIcon = new JLabel(new ImageIcon(mainImage));
-        
+       
        
         // 메뉴 버튼 이벤트
         menu.addActionListener(new ActionListener(){
@@ -119,6 +151,9 @@ public class MainView extends JFrame {
         highTemName.setBounds(540, 220, 350, 100);
         lowTem.setBounds(70, 260, 350, 100);
         lowTemName.setBounds(60, 220, 350, 100);
+        
+        lowTemName.setLocation(60, 220);
+       
 
         // 프레임에 추가
         add(menu);
@@ -130,9 +165,12 @@ public class MainView extends JFrame {
         add(lowTem);
         add(highTemName);
         add(lowTemName);
+        
+        add(background);
+
               
 		setBounds(500, 250, 700, 600);
-		
+		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
