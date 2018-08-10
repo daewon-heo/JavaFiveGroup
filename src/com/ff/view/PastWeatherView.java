@@ -13,6 +13,8 @@ import javax.swing.*;
 import com.ff.controller.PastWeatherController;
 import com.ff.model.CommonStatic;
 
+import develop.TestLoading;
+
 
 
 
@@ -22,15 +24,15 @@ public class PastWeatherView extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -5581181417128426852L;
-
-	public PastWeatherView(String str){
+	
+	public PastWeatherView(String iconAdress){
 		super("작년의 오늘 날씨와 현재 날씨");
-		initView(str);
+		
+		initView(iconAdress);
+		
 	}
 	
-	public void initView(String str) {
-		
-		PastWeatherController pwc = new PastWeatherController();
+	public void initView(String iconAdress) {
 		
 		setBounds(300, 300, 710, 618);
 		setLayout(new BorderLayout());
@@ -46,16 +48,14 @@ public class PastWeatherView extends JFrame {
 		JPanel pan2 = new JPanel();
 		JPanel pan3 = new JPanel();
 		
-		JLabel lb1 = new JLabel("작년의 오늘 날씨");
-		JLabel lb2 = new JLabel("현재 날씨");
-		JLabel lb3 = new JLabel(pwc.compareTemperature());
+		JLabel titleLb1 = new JLabel("작년의 오늘 날씨");
+		JLabel titleLb2 = new JLabel("현재 날씨");
+		JLabel compareLb = new JLabel(new PastWeatherController().compareTemperature());
 		
-		Image myImg = new ImageIcon(str).getImage()
+		Image myImg = new ImageIcon(iconAdress).getImage()
 				.getScaledInstance(180, 180, 0);
 		
-		JLabel wLb1 = new JLabel(new ImageIcon(myImg));
-		
-		JLabel wLb2 = new JLabel(new ImageIcon(myImg));
+		JLabel iconLb1 = new JLabel(new ImageIcon(myImg));
 		
 		pan1.setLayout(null);
 		
@@ -76,24 +76,24 @@ public class PastWeatherView extends JFrame {
 		pan3.setBackground(Color.white);
 		
 		
-		lb1.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		lb1.setFont(lb1.getFont().deriveFont(20.0f));
-		lb1.setLocation(95, 10);
-		lb1.setSize(300,30);
-		lb2.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		lb2.setFont(lb2.getFont().deriveFont(20.0f));
-		lb2.setLocation(490,10);
-		lb2.setSize(300,30);
-		lb3.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		lb3.setFont(lb3.getFont().deriveFont(20.0f));
+		titleLb1.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		titleLb1.setFont(titleLb1.getFont().deriveFont(20.0f));
+		titleLb1.setLocation(95, 10);
+		titleLb1.setSize(300,30);
+		titleLb2.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		titleLb2.setFont(titleLb2.getFont().deriveFont(20.0f));
+		titleLb2.setLocation(490,10);
+		titleLb2.setSize(300,30);
+		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
 		
-		wLb1.setLocation(85, 85);
-		wLb1.setSize(180, 180);
+		iconLb1.setLocation(85, 85);
+		iconLb1.setSize(180, 180);
 		
-		pan1.add(lb1);
-		pan1.add(wLb1);
-		pan2.add(lb2);
-		pan3.add(lb3);
+		pan1.add(titleLb1);
+		pan1.add(iconLb1);
+		pan2.add(titleLb2);
+		pan3.add(compareLb);
 		
 		
 		add(pan1);

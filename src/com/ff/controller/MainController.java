@@ -22,34 +22,34 @@ public class MainController {
 	private String day;
 	private String iconName;
 	
-/*	public MainController(){
+	public MainController(){
 		cal = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재시간
 		SimpleDateFormat wday = new SimpleDateFormat("E요일");
 		today = sdf.format(cal.getTime());
 		day = wday.format(cal.getTime());
-	}*/
-	
-	public MainController(){
-		iconName = "sun";
-		cal = new GregorianCalendar();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재 시간
-		today = sdf.format(cal.getTime());
-		SimpleDateFormat wday = new SimpleDateFormat("E요일");
-		day = wday.format(cal.getTime());
-		
-		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
-
-		nowTem = awsMap.get("기온"); // 현재 기온
-		rain = Boolean.parseBoolean(awsMap.get("강수감지"));
-		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
-		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
-		System.out.println(cal.get(Calendar.DATE) +",,"+ ((cal.get(Calendar.MONTH))+1) );
-		System.out.println("기온" +  nowTem);
-		humidity = Weather.GetPastWeather("108", cal.getWeekYear(), "12")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
-		
-		
 	}
+	
+//	public MainController(){
+//		iconName = "sun";
+//		cal = new GregorianCalendar();
+//		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재 시간
+//		today = sdf.format(cal.getTime());
+//		SimpleDateFormat wday = new SimpleDateFormat("E요일");
+//		day = wday.format(cal.getTime());
+//		
+//		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
+//
+//		nowTem = awsMap.get("기온"); // 현재 기온
+//		rain = Boolean.parseBoolean(awsMap.get("강수감지"));
+//		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+//		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+//		System.out.println(cal.get(Calendar.DATE) +",,"+ ((cal.get(Calendar.MONTH))+1) );
+//		System.out.println("기온" +  nowTem);
+//		humidity = Weather.GetPastWeather("108", cal.getWeekYear(), "12")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+//		
+//		
+//	}
 	
 	public String getIconName(){
 		if(rain == true){

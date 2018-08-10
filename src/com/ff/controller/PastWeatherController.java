@@ -2,13 +2,17 @@ package com.ff.controller;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.ff.view.PastWeatherView;
 
 import develop.Weather;
 
 public class PastWeatherController {
-	PastWeatherView view1View = null;
+	
+	private boolean isRain;
+	private PastWeatherView view1View = null;
 	
 	public PastWeatherController(){
 		
@@ -16,24 +20,38 @@ public class PastWeatherController {
 	
 	public void viewShow() {
 		
+		getWeatherData();
+		
+	}
+	
+	public void getWeatherData(){
 		Calendar cal = new GregorianCalendar();
 		
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		
+		Map temp = new HashMap();
+				
+		temp = Weather.GetCurrentWeather("108");
+		
+		String str1 = (String)temp.get("강수감지");
+		
+		int g = presentWeather(str1);
+		
+		String str2 = weatherIcon(g);
 		
 		
 		String[][] datas = Weather.GetPastWeather("108", year-1, "90");
 		
-		System.out.println("년 : " + (year-1));
-		System.out.println("day : " + day + " month : " + month);
+		System.out.printf("%d년 %d월 %d일", year-1, month, day);
 		
-		int num = weather(datas[day][month]);
+		int num = pastWeather(datas[day][month]);
 		
 		String str = weatherIcon(num);
 		
 		view1View = new PastWeatherView(str);
+		
 	}
 	
 	public String compareTemperature(){
@@ -83,22 +101,21 @@ public class PastWeatherController {
 		return icon;
 	}
 	
-	public int weather(String temp){
+	public int pastWeather(String str){
 		int result = 0;
 
-		if (temp == null) {
+		if (str == null) {
 			result = 10;
 		} else {
-			String[] str = temp.split(" ");
+			String[] temp = str.split(" ");
 
-			for (int i = 0; i < str.length; i++) {
-				System.out.println(str[i]);
-				if (str[i].equals("비") || str[i].equals("소나기")) {
+			for (int i = 0; i < temp.length; i++) {
+				if (temp[i].equals("비") || temp[i].equals("소나기")) {
 					result = 4;
 					break;
-				} else if (str[i].equals("햇무리")) {
+				} else if (temp[i].equals("햇무리")) {
 					result = 10;
-				} else if (str[i].equals("눈")) {
+				} else if (temp[i].equals("눈")) {
 					result = 7;
 				} else {
 					result = 1;
@@ -106,6 +123,13 @@ public class PastWeatherController {
 			}
 		}
 
+		return result;
+	}
+	
+	public int presentWeather(String str1){
+		int result = 10;
+		if(str1 == "1") result = 4;
+	
 		return result;
 	}
 }

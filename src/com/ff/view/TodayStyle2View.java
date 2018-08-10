@@ -123,7 +123,6 @@ public class TodayStyle2View extends JFrame {
 		    Image myPicture9 = new ImageIcon(path +  "9" +".jpg").getImage().getScaledInstance(150, 260, 0);
 
 		    
-		    
 		    btn1.setIcon(new ImageIcon(myPicture1));
 		    btn2.setIcon(new ImageIcon(myPicture2));
 		    btn3.setIcon(new ImageIcon(myPicture3));
