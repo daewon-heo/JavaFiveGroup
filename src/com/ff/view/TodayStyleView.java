@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.ff.controller.TodayStyleController2;
+import com.ff.controller.TodayStyle2Controller;
 
 public class TodayStyleView extends JFrame {
 
