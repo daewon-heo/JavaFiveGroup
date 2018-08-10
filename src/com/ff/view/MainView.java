@@ -52,26 +52,9 @@ public class MainView extends JFrame {
 	public void init() {
 		
 		setLayout(null);
-		//backGrounImg1();
+		backGrounImg1();
 		
 		ImageIcon icon = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG);
-		
-		
-		JPanel background = new JPanel() {
-            public void paintComponent(Graphics g) {
-                // Approach 1: Dispaly image at at full size
-                g.drawImage(icon.getImage(), 0, 0, null);
-                // Approach 2: Scale image to size of component
-                // Dimension d = getSize();
-                //g.drawImage(icon.getImage(), 0, 0, 700, 600, null);
-                // Approach 3: Fix the image position in the scroll pane
-                // Point p = scrollPane.getViewport().getViewPosition();
-                // g.drawImage(icon.getImage(), p.x, p.y, null);
-                setOpaque(false); //그림을 표시하게 설정,투명하게 조절
-                super.paintComponent(g);
-            }
-        };
-        
         
         
 		try {
@@ -81,21 +64,33 @@ public class MainView extends JFrame {
 		}
 
 		
-		
+		JLabel end = new JLabel();
 		
 		Image backg = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG).getImage().getScaledInstance(700, 600, 50);
-        Image myImg = new ImageIcon("datas/images/menu.png").getImage().getScaledInstance(50, 50, 0);
+        Image myImg = new ImageIcon("datas/images/main/button1.png").getImage().getScaledInstance(120,35, 0);
         
         // 메뉴 버튼
-        JButton menu = new JButton();
-        JPanel pan = new JPanel();
-        menu = new JButton(new ImageIcon(myImg));
-        menu.setLocation(0,0);
-        menu.setSize(60, 60);
-        menu.setFocusPainted(false); 
-        menu.setContentAreaFilled(false);
-       
+        initView();
+		
+		
         
+        btn1 = new JButton(new ImageIcon(myImg));
+        btn1.setFocusPainted(false); 
+        btn1.setContentAreaFilled(false);
+        btn1.setBorderPainted(false);
+        
+        myImg = new ImageIcon("datas/images/main/button2.png").getImage().getScaledInstance(125, 35 , 0);
+        btn2 = new JButton(new ImageIcon(myImg));
+        btn2.setFocusPainted(false); 
+        btn2.setContentAreaFilled(false);
+        btn2.setBorderPainted(false);
+        
+     
+        myImg = new ImageIcon("datas/images/main/button3.png").getImage().getScaledInstance(125, 35 , 0);
+        btn3 = new JButton(new ImageIcon(myImg));
+        btn3.setFocusPainted(false); 
+        btn3.setContentAreaFilled(false);
+        btn3.setBorderPainted(false);
         
         // 날짜
         JLabel today = new JLabel();
@@ -130,45 +125,46 @@ public class MainView extends JFrame {
         JLabel mainIcon = new JLabel(new ImageIcon(mainImage));
        
        
-        // 메뉴 버튼 이벤트
-        menu.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				initView();
-				addListener();
-				addComponent();
-			}	
-			
-		});
+       
         
         // 글씨 위치 조정
-        mainIcon.setBounds(195, 100, 300, 300);
-        today.setBounds(180,0,350,60);
-        day.setBounds(267,40,400,80);
-        nowTem.setBounds(280, 400, 350, 100);
+        mainIcon.setBounds(195, 160, 300, 300);
+        today.setBounds(185,60,350,60);
+        day.setBounds(272,100,400,80);
+        nowTem.setBounds(280, 410, 350, 100);
         
         highTem.setBounds(550, 260, 350, 100);
         highTemName.setBounds(540, 220, 350, 100);
-        lowTem.setBounds(70, 260, 350, 100);
+        lowTem.setBounds(60, 260, 350, 100);
         lowTemName.setBounds(60, 220, 350, 100);
         
         lowTemName.setLocation(60, 220);
-       
-
+        
+        // 버튼 위치 조정
+        btn1.setBounds(100, 0, 145, 50);
+        btn2.setBounds(250,0,145,50);
+        btn3.setBounds(400,0,145,50);
+        
+        addListener();
+        addComponent();
+        
         // 프레임에 추가
-        add(menu);
+        add(btn1);
+        add(btn2);
+        add(btn3);
         add(mainIcon);
         add(today);
+        add(lowTemName);
+        add(highTemName);
+        
         add(day);
         add(nowTem);
         add(highTem);
         add(lowTem);
-        add(highTemName);
-        add(lowTemName);
+        add(end);
         
-        add(background);
-
-              
+        
+    
 		setBounds(500, 250, 700, 600);
 		setResizable(false);
 		setVisible(true);
@@ -177,16 +173,16 @@ public class MainView extends JFrame {
 	
 	public void initView() {
 		
-		jf.setBounds(200, 200, 300, 300);
-		jf.setLayout(new GridLayout());
+//		jf.setBounds(200, 200, 300, 300);
+//		jf.setLayout(new GridLayout());
 
 		btn1 = new JButton("화면1");
 		btn2 = new JButton("화면2");
 		btn3 = new JButton("화면3");
 		
-		jf.setResizable(false);
-		jf.setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		jf.setResizable(false);
+//		jf.setVisible(true);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
 	
