@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.ff.controller.TodayStyleController2;
+
 public class TodayStyleView extends JFrame {
 
 	/**
@@ -61,7 +63,7 @@ public class TodayStyleView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				new TodayStyle2View();
 				
 			}
 			

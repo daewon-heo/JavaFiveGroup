@@ -3,27 +3,27 @@ package com.ff.controller;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.ff.view.TodayStyleView;
+
 import com.ff.view.TodayStyle2View;
 
-public class TodayStyleController {
-	TodayStyleView TodayStyleView = null;
+public class TodayStyle2Controller {
+	TodayStyle2View TodayStyle2View = null;
 	
 	
-	public TodayStyleController(){
+	public TodayStyle2Controller(){
 		
 	}
 	
 	public void viewShow() {
-		TodayStyleView = new TodayStyleView(randStyle());
 		
+		TodayStyle2View = new TodayStyle2View();
 //		String[][] datas = Weather.GetPastWeather("108", 2018, "08");
 //		TodayStyleView.dataView(datas);
 	}
 	
 	public String randStyle(){
 		Calendar cal = new GregorianCalendar();
-		int iSeason = cal.get(Calendar.MONTH) +1;
+		int iSeason = cal.get(Calendar.MONTH) -1;
 		System.out.println("현재 월 : " + iSeason);
 		
 		String sSeason = null;
