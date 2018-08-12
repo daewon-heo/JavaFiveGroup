@@ -102,6 +102,7 @@ public class TodayStyle2View extends JFrame {
 	public void nineImg(String season, JPanel panel){
 		
 		String path = "datas/images/style/" + season + "/";
+		
 		JButton btn1 = new JButton();
 		JButton btn2 = new JButton();
 		JButton btn3 = new JButton();

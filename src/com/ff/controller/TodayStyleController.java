@@ -1,15 +1,64 @@
 package com.ff.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 import com.ff.view.TodayStyleView;
-import com.ff.view.TodayStyle2View;
+
+import develop.Weather;
 
 public class TodayStyleController {
 	TodayStyleView TodayStyleView = null;
 	
+	private String nowTem;		 // 현재 기온
+	private String region;      // 지역
+	private String today;	 // 오늘 날짜
+	private String high;		 // 최고 기온
+	private String low; 		 // 최저 기온
 	
+	
+	public String getNowTem() {
+		return nowTem;
+	}
+
+	public void setNowTem(String nowTem) {
+		this.nowTem = nowTem;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getToday() {
+		return today;
+	}
+
+	public void setToday(String today) {
+		this.today = today;
+	}
+
+	public String getHigh() {
+		return high;
+	}
+
+	public void setHigh(String high) {
+		this.high = high;
+	}
+
+	public String getLow() {
+		return low;
+	}
+
+	public void setLow(String low) {
+		this.low = low;
+	}
+
 	public TodayStyleController(){
 		
 	}
@@ -56,5 +105,21 @@ public class TodayStyleController {
 		
 		return stylePath;
 		
+	}
+	
+	public void weather(){
+		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
+		Calendar cal = new GregorianCalendar();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("E요일, MM월 dd일");
+		nowTem = awsMap.get("기온");
+		region = awsMap.get("지점번호");
+		today = sdf.format(cal.getTime());
+		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+		
+		/*System.out.println(awsMap);
+		System.out.println("현재 기온 : " + awsMap.get("기온"));
+		System.out.println("강수감지 : " + awsMap.get("강수감지"));*/
 	}
 }
