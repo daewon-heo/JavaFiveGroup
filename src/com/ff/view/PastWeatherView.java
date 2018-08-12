@@ -14,6 +14,7 @@ import com.ff.controller.PastWeatherController;
 import com.ff.model.CommonStatic;
 
 import develop.TestLoading;
+import develop.Weather;
 
 
 
@@ -25,16 +26,16 @@ public class PastWeatherView extends JFrame {
 	 */
 	private static final long serialVersionUID = -5581181417128426852L;
 	
-	public PastWeatherView(String iconAdress){
+	public PastWeatherView(String pastIcon, String presentIcon, String temperature, String humidity){
 		super("작년의 오늘 날씨와 현재 날씨");
 		
-		initView(iconAdress);
+		initView(pastIcon , presentIcon ,temperature, humidity);
 		
 	}
 	
-	public void initView(String iconAdress) {
+	public void initView(String pastIcon, String presentIcon, String temperature, String humidity) {
 		
-		setBounds(300, 300, 710, 618);
+		setBounds(300, 300, 710, 624);
 		setLayout(new BorderLayout());
 		
 		try {
@@ -52,10 +53,18 @@ public class PastWeatherView extends JFrame {
 		JLabel titleLb2 = new JLabel("현재 날씨");
 		JLabel compareLb = new JLabel(new PastWeatherController().compareTemperature());
 		
-		Image myImg = new ImageIcon(iconAdress).getImage()
+		Image pastWeatherIcon = new ImageIcon(pastIcon).getImage()
 				.getScaledInstance(180, 180, 0);
 		
-		JLabel iconLb1 = new JLabel(new ImageIcon(myImg));
+		Image presentWeaterIcon = new ImageIcon(presentIcon).getImage()
+				.getScaledInstance(180, 180, 0);
+		
+		JLabel iconLb1 = new JLabel(new ImageIcon(pastWeatherIcon));
+		
+		JLabel iconLb2 = new JLabel(new ImageIcon(presentWeaterIcon));
+		
+		JLabel pastTemperature = new JLabel(temperature);
+		JLabel pastHumidity = new JLabel(humidity);
 		
 		pan1.setLayout(null);
 		
@@ -86,13 +95,27 @@ public class PastWeatherView extends JFrame {
 		titleLb2.setSize(300,30);
 		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
+		pastTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		pastTemperature.setFont(pastTemperature.getFont().deriveFont(20.0f));
+		pastTemperature.setLocation(150, 300);
+		pastTemperature.setSize(100,30);
+		pastHumidity.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		pastHumidity.setFont(pastHumidity.getFont().deriveFont(20.0f));
+		pastHumidity.setLocation(150, 350);
+		pastHumidity.setSize(100,30);
+		
 		
 		iconLb1.setLocation(85, 85);
 		iconLb1.setSize(180, 180);
+		iconLb2.setLocation(440, 85);
+		iconLb2.setSize(180, 180);
 		
 		pan1.add(titleLb1);
 		pan1.add(iconLb1);
+		pan1.add(pastTemperature);
+		pan1.add(pastHumidity);
 		pan2.add(titleLb2);
+		pan2.add(iconLb2);
 		pan3.add(compareLb);
 		
 		
@@ -104,5 +127,6 @@ public class PastWeatherView extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
+	
 
 }
