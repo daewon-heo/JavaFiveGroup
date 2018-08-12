@@ -62,8 +62,12 @@ public class PastWeatherController {
 		
 		String presentIcon = weatherIcon(g);
 		
+		// ================== 현재 온도
+		String ta = temp.get("기온") + " ℃";
+		// ================== 현재 습도
+		String hm = temp.get("습도") +" %";
 		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
-		view1View = new PastWeatherView(pastIcon, presentIcon, temperature, humidity);
+		view1View = new PastWeatherView(pastIcon, presentIcon, temperature, humidity, ta, hm);
 		
 	}
 	

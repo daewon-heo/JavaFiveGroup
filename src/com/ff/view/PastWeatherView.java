@@ -26,14 +26,14 @@ public class PastWeatherView extends JFrame {
 	 */
 	private static final long serialVersionUID = -5581181417128426852L;
 	
-	public PastWeatherView(String pastIcon, String presentIcon, String temperature, String humidity){
+	public PastWeatherView(String pastIcon, String presentIcon, String temperature, String humidity, String ta, String hm){
 		super("작년의 오늘 날씨와 현재 날씨");
 		
-		initView(pastIcon , presentIcon ,temperature, humidity);
+		initView(pastIcon , presentIcon ,temperature, humidity, ta, hm);
 		
 	}
 	
-	public void initView(String pastIcon, String presentIcon, String temperature, String humidity) {
+	public void initView(String pastIcon, String presentIcon, String temperature, String humidity, String ta, String hm) {
 		
 		setBounds(300, 300, 710, 624);
 		setLayout(new BorderLayout());
@@ -65,6 +65,9 @@ public class PastWeatherView extends JFrame {
 		
 		JLabel pastTemperature = new JLabel(temperature);
 		JLabel pastHumidity = new JLabel(humidity);
+		
+		JLabel presentTemperature = new JLabel(ta);
+		JLabel presentHumidity = new JLabel(hm);
 		
 		pan1.setLayout(null);
 		
@@ -103,6 +106,14 @@ public class PastWeatherView extends JFrame {
 		pastHumidity.setFont(pastHumidity.getFont().deriveFont(20.0f));
 		pastHumidity.setLocation(150, 350);
 		pastHumidity.setSize(100,30);
+		presentTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		presentTemperature.setFont(presentTemperature.getFont().deriveFont(20.0f));
+		presentTemperature.setLocation(500, 300);
+		presentTemperature.setSize(100,30);
+		presentHumidity.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		presentHumidity.setFont(presentHumidity.getFont().deriveFont(20.0f));
+		presentHumidity.setLocation(500, 350);
+		presentHumidity.setSize(100,30);
 		
 		
 		iconLb1.setLocation(85, 85);
@@ -116,6 +127,8 @@ public class PastWeatherView extends JFrame {
 		pan1.add(pastHumidity);
 		pan2.add(titleLb2);
 		pan2.add(iconLb2);
+		pan2.add(presentTemperature);
+		pan2.add(presentHumidity);
 		pan3.add(compareLb);
 		
 		
