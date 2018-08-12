@@ -25,45 +25,32 @@ public class PastWeatherController {
 	}
 	
 	public void getWeatherData(){
-		
-		// ================== 과거 날씨로 아이콘 가져오기
 		Calendar cal = new GregorianCalendar();
 		
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		
-		String[][] datas1 = Weather.GetPastWeather("108", year-1, "90");
-		
-		System.out.printf("%d년 %d월 %d일", year-1, month, day);
-		
-		int num = pastWeather(datas1[day][month]);
-		
-		String pastIcon = weatherIcon(num);
-		
-		// ================== 작년 최고 온도
-		String[][] datas2 = Weather.GetPastWeather("108", year-1, "08");
-		String temperature = datas2[day][month] + " ℃";
-		System.out.println(temperature + " ℃");
-		
-		// ================== 작년 습도
-		String[][] datas3 = Weather.GetPastWeather("108", year-1, "12");
-		String humidity = datas3[day][month] +" %";
-		System.out.println(humidity +" %");
-		
-		// ================== 현재 날씨로 아이콘 가져오기
 		Map temp = new HashMap();
-		
+				
 		temp = Weather.GetCurrentWeather("108");
 		
 		String str1 = (String)temp.get("강수감지");
 		
 		int g = presentWeather(str1);
 		
-		String presentIcon = weatherIcon(g);
+		String str2 = weatherIcon(g);
 		
-		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
-		view1View = new PastWeatherView(pastIcon, presentIcon, temperature, humidity);
+		
+		String[][] datas = Weather.GetPastWeather("108", year-1, "90");
+		
+		System.out.printf("%d년 %d월 %d일", year-1, month, day);
+		
+		int num = pastWeather(datas[day][month]);
+		
+		String str = weatherIcon(num);
+		
+		view1View = new PastWeatherView(str);
 		
 	}
 	
