@@ -25,14 +25,31 @@ public class PastWeatherView extends JFrame {
 	 * 
 	 */
 	
+	JLabel loadingLabel = null;
 	private PastWeatherController pwc = new PastWeatherController();
 	private static final long serialVersionUID = -5581181417128426852L;
 	
 	public PastWeatherView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm){
 		super("작년의 오늘 날씨와 현재 날씨");
 		
+		
 		initView(pastIcon , presentIcon ,temperature, humidity, ta, hm);
 		
+	}
+	
+	public void loadingView(){
+		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
+		loadingLabel = new JLabel(imageIcon);
+    	add(loadingLabel);
+    	
+    	JLabel lb = new JLabel();
+    	try {
+			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
+		} catch (IOException e1) {
+			System.out.println("이미지파일 오류 발생");
+		}
+    	setBounds(500, 250, 700, 600);
+    	setVisible(true);
 	}
 	
 	public void initView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm) {
@@ -83,8 +100,6 @@ public class PastWeatherView extends JFrame {
 		
 		pan2.setBackground(Color.white);
 		
-		pan2.setBounds(0, 0, 0, 0);
-		
 		pan2.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
 		
 		pan3.setBackground(Color.white);
@@ -101,26 +116,26 @@ public class PastWeatherView extends JFrame {
 		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
 		pastTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		pastTemperature.setFont(pastTemperature.getFont().deriveFont(20.0f));
-		pastTemperature.setLocation(150, 300);
-		pastTemperature.setSize(100,30);
+		pastTemperature.setFont(pastTemperature.getFont().deriveFont(35.0f));
+		pastTemperature.setLocation(130, 350);
+		pastTemperature.setSize(120,30);
 		pastHumidity.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		pastHumidity.setFont(pastHumidity.getFont().deriveFont(20.0f));
-		pastHumidity.setLocation(150, 350);
-		pastHumidity.setSize(100,30);
+		pastHumidity.setFont(pastHumidity.getFont().deriveFont(35.0f));
+		pastHumidity.setLocation(130, 420);
+		pastHumidity.setSize(120,30);
 		presentTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		presentTemperature.setFont(presentTemperature.getFont().deriveFont(20.0f));
-		presentTemperature.setLocation(500, 300);
-		presentTemperature.setSize(100,30);
+		presentTemperature.setFont(presentTemperature.getFont().deriveFont(35.0f));
+		presentTemperature.setLocation(485, 350);
+		presentTemperature.setSize(120,30);
 		presentHumidity.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		presentHumidity.setFont(presentHumidity.getFont().deriveFont(20.0f));
-		presentHumidity.setLocation(500, 350);
-		presentHumidity.setSize(100,30);
+		presentHumidity.setFont(presentHumidity.getFont().deriveFont(35.0f));
+		presentHumidity.setLocation(485, 420);
+		presentHumidity.setSize(120,30);
 		
 		
-		iconLb1.setLocation(85, 85);
+		iconLb1.setLocation(80, 85);
 		iconLb1.setSize(200, 200);
-		iconLb2.setLocation(440, 85);
+		iconLb2.setLocation(435, 85);
 		iconLb2.setSize(200, 200);
 		
 		pan1.add(titleLb1);

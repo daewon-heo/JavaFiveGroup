@@ -1,5 +1,6 @@
 package com.ff.controller;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -28,7 +29,6 @@ public class PastWeatherController {
 	
 	public void getWeatherData(){
 		
-		System.out.println("getWeather");
 		// ================== 과거 날씨로 아이콘 가져오기
 		Calendar cal = new GregorianCalendar();
 		
@@ -77,12 +77,15 @@ public class PastWeatherController {
 	public static String compareTemperature(){
 		// 작년 온도와 현재 온도를 비교해서
 		// 현재 온도가 작년보다 얼마나 높거나 낮은지 리턴 해준다.
-		System.out.println("compareTemperature()");
 		String str = "";
-		 if( temperature > ta){
-				str += "오늘이 작년보다 "+(ta-temperature)+" 도 더 낮습니다.";
+		
+		String tmp = "#.#";
+		DecimalFormat df = new DecimalFormat(tmp); 
+		
+		if( temperature > ta){
+				str += "오늘이 작년보다 "+df.format((ta-temperature)*-1)+" ℃ 더 낮습니다.";
 		 } else if ( temperature < ta ){
-		 		str += "오늘이 작년보다 "+(ta-temperature)+" 도 더 높습니다.";
+			 	str += "오늘이 작년보다 "+df.format((ta-temperature))+" ℃ 더 높습니다.";
 		 } else {
 		 		str += "오늘은 작년과 온도가 같습니다.";
 		 }
