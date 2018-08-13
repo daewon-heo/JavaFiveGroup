@@ -61,6 +61,7 @@ public class MainView extends JFrame {
 	}
 	
 	public void loadingView(){
+		backGrounImg1();
 		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
 		loadingLabel = new JLabel(imageIcon);
     	add(loadingLabel);
@@ -293,8 +294,13 @@ public class MainView extends JFrame {
 	}
 	
 	  public void backGrounImg1(){
-	      try {
-	          final BufferedImage backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
+		  BufferedImage backgroundImage;
+		  try {
+	    	  if(mc.getIconName().equals("sun")){
+	    		 backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
+	    	  }else{
+	    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/rain.jpg"));
+	    	  }
 	          setContentPane(new JPanel(new BorderLayout()) {
 	              @Override public void paintComponent(Graphics g) {
 	                  g.drawImage(backgroundImage, 0, 0, null);
