@@ -272,7 +272,7 @@ public class MainView extends JFrame {
 		btn2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				view2Controller = new TodayStyleController();
+				view2Controller =  TodayStyleController.getInstance();
 				view2Controller.viewShow();
 			}
 		});
@@ -294,13 +294,20 @@ public class MainView extends JFrame {
 	}
 	
 	  public void backGrounImg1(){
-		  BufferedImage backgroundImage;
-		  try {
-	    	  if(mc.getIconName().equals("sun")){
-	    		 backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
-	    	  }else{
-	    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/rain.jpg"));
-	    	  }
+		 
+
+		  Image snow = new ImageIcon("datas/images/main/snow.png").getImage().getScaledInstance(700, 600, 0);
+		  
+	    	  BufferedImage backgroundImage;
+			  try {
+		    	  if(mc.getIconName().equals("snow")){
+		    		 backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/snow.jpg"));
+		    	  }else if(mc.getIconName().equals("rain")){
+		    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/rain.jpg"));
+		    	  }else{
+		    		  backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
+		    	  }
+	    	  
 	          setContentPane(new JPanel(new BorderLayout()) {
 	              @Override public void paintComponent(Graphics g) {
 	                  g.drawImage(backgroundImage, 0, 0, null);
@@ -308,6 +315,8 @@ public class MainView extends JFrame {
 	          });
 	      } catch (IOException e) {
 	          throw new RuntimeException(e);
+	      }finally{
+	  
 	      }
 	   }
 }
