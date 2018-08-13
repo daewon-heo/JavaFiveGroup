@@ -50,7 +50,7 @@ public class MainController {
 		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
 
 		nowTem = awsMap.get("기온"); // 현재 기온
-		rain = !Boolean.parseBoolean(awsMap.get("강수감지"));
+		rain = Boolean.parseBoolean(awsMap.get("강수감지"));
 		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		System.out.println(cal.get(Calendar.DATE) +",,"+ ((cal.get(Calendar.MONTH))+1) );
@@ -58,10 +58,6 @@ public class MainController {
 		humidity = Weather.GetPastWeather("108", cal.getWeekYear(), "12")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		System.out.println("습도"+humidity);
 		
-		double tem = Double.parseDouble(nowTem);
-		System.out.println(tem);
-		nowTem = "";
-		nowTem = "" + tem*-1;
 		
 	}
 	
