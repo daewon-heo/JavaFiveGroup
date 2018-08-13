@@ -8,8 +8,9 @@ import java.util.Map;
 import com.ff.view.PastWeatherView2;
 
 import develop.Weather;
+import jdk.nashorn.internal.runtime.regexp.joni.SearchAlgorithm;
 
-public class PastWeatherController2 {
+public class PastWeatherController2 implements Runnable {
 	
 	private boolean isRain;
 	private PastWeatherView2 view1View = null;
@@ -22,12 +23,21 @@ public class PastWeatherController2 {
 		return instance;
 	}
 	
+	
+	static String searchYear = null;
+	public static PastWeatherController2 getInstance(String search) {
+		searchYear = search;
+		if(instance == null)
+			instance = new PastWeatherController2();
+		return instance;
+	}
+	
 	private PastWeatherController2(){
 		
 	}
 	
+	
 	public void viewShow() {
-		
 		getWeatherData();
 		
 	}
@@ -50,11 +60,11 @@ public class PastWeatherController2 {
 		String str2 = weatherIcon(g);
 		
 		
-		String[][] datas = Weather.GetPastWeather("108", year-1, "90");
+//		String[][] datas = Weather.GetPastWeather("108", year-1, "90");
+		String[][] test = { {"",""}};
+		String[][] datas = test; 
 		
-		System.out.printf("%d년 %d월 %d일", year-1, month, day);
-		
-		int num = pastWeather(datas[day][month]);
+		int num = 1;
 		
 		String str = weatherIcon(num);
 		
@@ -139,5 +149,14 @@ public class PastWeatherController2 {
 		if(str1 == "1") result = 4;
 	
 		return result;
+	}
+
+	@Override
+	public void run() {
+		/*
+		 * view의 dataView에 보낼 데이터 작성
+		 */
+		String str = searchYear;
+		
 	}
 }
