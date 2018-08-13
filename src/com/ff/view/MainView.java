@@ -313,7 +313,7 @@ public class MainView extends JFrame {
 	  public void backGrounImg1(){
 		 
 
-		  Image snow = new ImageIcon("datas/images/main/snow.png").getImage().getScaledInstance(700, 600, 0);
+		
 		  
 	    	  BufferedImage backgroundImage;
 			  try {
@@ -322,7 +322,8 @@ public class MainView extends JFrame {
 		    	  }else if(mc.getIconName().equals("rain")){
 		    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/rain.jpg"));
 		    	  }else{
-		    		  backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
+		    		  //backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
+		    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/back.jpg"));
 		    	  }
 	    	  
 	          setContentPane(new JPanel(new BorderLayout()) {
