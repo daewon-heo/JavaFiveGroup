@@ -52,14 +52,14 @@ public class PastWeatherController {
 		// ================== 작년 습도
 		String[][] datas3 = Weather.GetPastWeather("108", year-1, "12");
 		String humidity = datas3[day][month] +" %";
-		System.out.println("작년 습도 : " + humidity +" %");
+		System.out.println("작년 습도 : " + humidity);
 		
 		// ================== 현재 날씨로 아이콘 가져오기
-		Map temp = new HashMap();
+		Map<String, String> temp = new HashMap<String, String>();
 		
 		temp = Weather.GetCurrentWeather("108");
 		
-		String str1 = (String)temp.get("강수감지");
+		String str1 = temp.get("강수감지");
 		
 		int g = presentWeather(str1);
 		
@@ -71,8 +71,11 @@ public class PastWeatherController {
 		} catch(NumberFormatException e){
 			System.out.println("트래픽이 1000건을 초과해서 기온과 습도를 불러올수 없습니다.");
 		}
+		System.out.println("현재 온도 : " + ta + " ℃");
+		
 		// ================== 현재 습도
 		String hm = temp.get("습도") +" %";
+		System.out.println("현재 습도 : " + hm);
 		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
 		view1View = new PastWeatherView(pastIcon, presentIcon, temperature, humidity, ta, hm);
 		
@@ -87,11 +90,11 @@ public class PastWeatherController {
 		DecimalFormat df = new DecimalFormat(tmp); 
 		
 		if( temperature > ta){
-				str += "오늘이 작년보다 "+df.format((ta-temperature)*-1)+" ℃ 더 낮습니다.";
+				str = "오늘이 작년보다 "+df.format((ta-temperature)*-1)+" ℃ 더 낮습니다.";
 		 } else if ( temperature < ta ){
-			 	str += "오늘이 작년보다 "+df.format((ta-temperature))+" ℃ 더 높습니다.";
+			 	str = "오늘이 작년보다 "+df.format((ta-temperature))+" ℃ 더 높습니다.";
 		 } else {
-		 		str += "오늘은 작년과 온도가 같습니다.";
+		 		str = "오늘은 작년과 온도가 같습니다.";
 		 }
 		return str;
 	}

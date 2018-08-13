@@ -1,21 +1,18 @@
 package com.ff.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import com.ff.controller.PastWeatherController;
 import com.ff.model.CommonStatic;
-
-import develop.TestLoading;
-import develop.Weather;
 
 
 
@@ -27,11 +24,10 @@ public class PastWeatherView extends JFrame {
 	 */
 	
 	JLabel loadingLabel = null;
-	private PastWeatherController pwc = new PastWeatherController();
 	private static final long serialVersionUID = -5581181417128426852L;
 	
 	public PastWeatherView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm){
-		super("작년의 오늘 날씨와 현재 날씨");
+		super("작년의 오늘은 어땠을까?");
 		
 		
 		initView(pastIcon , presentIcon ,temperature, humidity, ta, hm);
@@ -55,8 +51,8 @@ public class PastWeatherView extends JFrame {
 	
 	public void initView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm) {
 		
-		setBounds(300, 300, 710, 618);
-		setLayout(new BorderLayout());
+		setBounds(300, 300, 710, 620);
+		setLayout(null);
 		
 		try {
 			setIconImage(ImageIO.read(new File(CommonStatic.PASTWEATHER_ICON)));
@@ -65,13 +61,14 @@ public class PastWeatherView extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JPanel pan1 = new JPanel();
-		JPanel pan2 = new JPanel();
-		JPanel pan3 = new JPanel();
+		JLabel background = 
+				new JLabel(new ImageIcon(CommonStatic.BACKGROUND_MAIN_IMG));
+		
+		background.setBounds(0,0,710,620);
 		
 		JLabel titleLb1 = new JLabel("작년의 오늘 날씨");
 		JLabel titleLb2 = new JLabel("현재 날씨");
-		JLabel compareLb = new JLabel(pwc.compareTemperature());
+		JLabel compareLb = new JLabel(PastWeatherController.compareTemperature());
 		
 		Image pastWeatherIcon = new ImageIcon(pastIcon).getImage()
 				.getScaledInstance(200, 200, 0);
@@ -89,35 +86,20 @@ public class PastWeatherView extends JFrame {
 		JLabel presentTemperature = new JLabel(ta+" ℃");
 		JLabel presentHumidity = new JLabel(hm);
 		
-		pan1.setLayout(null);
 		
-		pan1.setBackground(Color.white);
-		
-		pan1.setBounds(0, 0, 355, 552);
-		
-		pan1.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
-		
-		pan2.setLayout(null);
-		
-		pan2.setBackground(Color.white);
-		
-		pan2.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
-		
-		pan3.setBackground(Color.white);
-		
-		
-		titleLb1.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		titleLb1.setFont(titleLb1.getFont().deriveFont(20.0f));
+		titleLb1.setFont(new Font("맑은 고딕", Font.BOLD, 2));
+		titleLb1.setFont(titleLb1.getFont().deriveFont(25.0f));
 		titleLb1.setLocation(95, 10);
 		titleLb1.setSize(300,30);
 		
-		titleLb2.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		titleLb2.setFont(titleLb2.getFont().deriveFont(20.0f));
-		titleLb2.setLocation(490,10);
+		titleLb2.setFont(new Font("맑은 고딕", Font.BOLD, 2));
+		titleLb2.setFont(titleLb2.getFont().deriveFont(25.0f));
+		titleLb2.setLocation(485,10);
 		titleLb2.setSize(300,30);
 		
 		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
+		compareLb.setFont(compareLb.getFont().deriveFont(25.0f));
+		compareLb.setBounds(150,530,500,30);
 		
 		pastTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		pastTemperature.setFont(pastTemperature.getFont().deriveFont(35.0f));
@@ -144,19 +126,17 @@ public class PastWeatherView extends JFrame {
 		iconLb2.setLocation(435, 85);
 		iconLb2.setSize(200, 200);
 		
-		pan1.add(titleLb1);
-		pan1.add(iconLb1);
-		pan1.add(pastTemperature);
-		pan1.add(pastHumidity);
-		pan2.add(titleLb2);
-		pan2.add(iconLb2);
-		pan2.add(presentTemperature);
-		pan2.add(presentHumidity);
-		pan3.add(compareLb);
+		background.add(titleLb1);
+		background.add(titleLb2);
+		background.add(compareLb);
+		background.add(pastTemperature);
+		background.add(pastHumidity);
+		background.add(presentTemperature);
+		background.add(presentHumidity);
+		background.add(iconLb1);
+		background.add(iconLb2);
+		add(background);
 		
-		add(pan1);
-		add(pan2);
-		add(pan3,"South");
 		
 		setResizable(false);
 		setVisible(true);
