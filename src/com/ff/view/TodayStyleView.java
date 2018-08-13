@@ -106,14 +106,14 @@ public class TodayStyleView extends JFrame {
 		this.getContentPane().add(today);
 
 		high = new JLabel();
-		high.setText("최고: "+tsc.getHigh()+"℃");
+		high.setText("Highs: "+tsc.getHigh()+"℃");
 		high.setForeground(Color.WHITE);	
 		high.setFont(new Font("Fixedsys",Font.BOLD, 20));
 		high.setBounds(30, 675, 130, 25);
 		this.getContentPane().add(high);
 
 		low = new JLabel();
-		low.setText("최저: "+tsc.getLow()+"℃");
+		low.setText("Lows: "+tsc.getLow()+"℃");
 		low.setForeground(Color.WHITE);	
 		low.setFont(new Font("Fixedsys",Font.BOLD, 20));
         low.setBounds(30, 705, 130, 25);	

@@ -3,6 +3,7 @@ package com.ff.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Map;
 
 import com.ff.view.TodayStyleView;
@@ -120,9 +121,9 @@ public class TodayStyleController {
 		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
 		Calendar cal = new GregorianCalendar();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("E요일, MM월 dd일");
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d", new Locale("US"));
 		nowTem = awsMap.get("기온");
-		region = "서울";
+		region = "Seoul";
 		today = sdf.format(cal.getTime());
 		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
