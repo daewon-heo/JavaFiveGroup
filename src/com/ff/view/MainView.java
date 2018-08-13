@@ -262,7 +262,7 @@ public class MainView extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				loadingView();
+				
 				view1Controller = new PastWeatherController();
 				view1Controller.viewShow();
 			}
