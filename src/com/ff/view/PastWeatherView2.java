@@ -3,6 +3,8 @@ package com.ff.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +31,14 @@ public class PastWeatherView2 extends JFrame {
 	
 	private static PastWeatherView2 instance = null;
 	
+	private JPanel pastWeatherPanel = null;		// pan1
+	private JPanel currWeatherPanel = null;		// pan2
+	private JPanel compWeatherPanel = null;		// pan3
+	
+	private JPanel swapPanel = null;		// 로딩&데이터 화면을 변경하는 패널
+	private JPanel loadingPanel = null;		// 로딩 화면
+	private JPanel resultPanel = null;		// 데이터 화면
+	
 	public static PastWeatherView2 getInstance(String iconAdress) {
 		if(instance == null)
 			instance = new PastWeatherView2(iconAdress);
@@ -39,70 +49,59 @@ public class PastWeatherView2 extends JFrame {
 		super("작년의 오늘 날씨와 현재 날씨");
 		
 		initView(iconAdress);
+		lodingView();
+	}
+	
+	public void lodingView(){
+		/*
+		 * 로딩뷰 이미지 넣기
+		 */
+		if(resultPanel != null)
+			swapPanel.remove(resultPanel);
 		
 	}
 	
 	public void initView(String iconAdress) {
+		GridBagLayout gridBag = new GridBagLayout();
+		setLayout(gridBag);
 		
-		setBounds(300, 300, 710, 618);
-		setLayout(new BorderLayout());
+		GridBagConstraints constraint = new GridBagConstraints();
+		constraint.fill = GridBagConstraints.BOTH;
+		constraint.weightx = 1.0;
+		constraint.weighty = 1.0;
 		
-		try {
-			setIconImage(ImageIO.read(new File(CommonStatic.PASTWEATHER_ICON)));
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
+		pastWeatherPanel = new JPanel();
+		currWeatherPanel = new JPanel();
+		compWeatherPanel = new JPanel();
 		
-		JPanel pan1 = new JPanel();
-		JPanel pan2 = new JPanel();
-		JPanel pan3 = new JPanel();
+		/* panel1 */
+		pastWeatherPanel.setBackground(Color.red);
+		gridBag.setConstraints(pastWeatherPanel, constraint);
 		
-		JLabel titleLb1 = new JLabel("작년의 오늘 날씨");
-		JLabel titleLb2 = new JLabel("현재 날씨");
-		JLabel compareLb = new JLabel(PastWeatherController2.getInstance().compareTemperature());
+		/* panel2 */
+		currWeatherPanel.setBackground(Color.yellow);
+		constraint.gridwidth = GridBagConstraints.REMAINDER;
+		gridBag.setConstraints(currWeatherPanel, constraint);
 		
-		Image myImg = new ImageIcon(iconAdress).getImage()
-				.getScaledInstance(180, 180, 0);
+		/* panel3 */
+		compWeatherPanel.setBackground(Color.black);
+		constraint.weighty = 0.07;
+		gridBag.setConstraints(compWeatherPanel, constraint);
 		
-		JLabel iconLb1 = new JLabel(new ImageIcon(myImg));
+		add(pastWeatherPanel);
+		add(currWeatherPanel);
+		add(compWeatherPanel);
 		
-		pan1.setLayout(null);
-		pan1.setBackground(Color.white);
-		pan1.setBounds(0, 0, 355, 552);
-		pan1.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
-		pan2.setLayout(null);
-		pan2.setBackground(Color.white);
-		pan2.setBounds(0, 0, 0, 0);
-		pan2.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
-		pan3.setBackground(Color.white);
-		
-		titleLb1.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		titleLb1.setFont(titleLb1.getFont().deriveFont(20.0f));
-		titleLb1.setLocation(95, 10);
-		titleLb1.setSize(300,30);
-		titleLb2.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		titleLb2.setFont(titleLb2.getFont().deriveFont(20.0f));
-		titleLb2.setLocation(490,10);
-		titleLb2.setSize(300,30);
-		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
-		
-		iconLb1.setLocation(85, 85);
-		iconLb1.setSize(180, 180);
-		
-		pan1.add(titleLb1);
-		pan1.add(iconLb1);
-		pan2.add(titleLb2);
-		pan3.add(compareLb);
-		
-		add(pan1);
-		add(pan2);
-		add(pan3,"South");
-		
+		setBounds(300, 300, 716, 620);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
+	public void dataView(){
+		JLabel compareLb = new JLabel(PastWeatherController2.getInstance().compareTemperature());
+		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
+		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
+		compWeatherPanel.add(compareLb);
+	}
 }
