@@ -67,7 +67,7 @@ public class SpecificDateView extends JFrame {
 		searchBtn.setLocation(275, 320);
 		searchBtn.setSize(40, 29);
 		
-		ImageIcon image4 = new ImageIcon("datas/images/SunLoading2.gif"); // 로딩 이미지
+		ImageIcon image4 = new ImageIcon("datas/images/SunLoading.gif"); // 로딩 이미지
 		JLabel loading = new JLabel(image4);
 		loading.setLocation(180, 35);
 		loading.setSize(70, 70);
