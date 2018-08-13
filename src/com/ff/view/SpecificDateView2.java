@@ -27,7 +27,7 @@ import com.sun.prism.Image;
 
 import develop.Weather;
 
-public class SpecificDateView2 extends JFrame {
+public class SpecificDateView2 extends JFrame{
 
 	/**
 	 * 
@@ -57,7 +57,6 @@ public class SpecificDateView2 extends JFrame {
 	private SpecificDateView2() {
 		super("특정 날짜 조회");
 		initView();
-
 	}
 
 	public void initView() {
@@ -104,8 +103,6 @@ public class SpecificDateView2 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) { // ActionEvent
 				loadingView();
-				String[][] datas = getData();
-				dataView(datas);
 			}
 		}); // ActionListener close
 		
@@ -113,10 +110,10 @@ public class SpecificDateView2 extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String[][] datas = getData();
-				dataView(datas);
+				new Thread(SpecificDateController2.getInstance()).start();
 			}
 		}); 
+		
 
 		bgPanel.add(label1);
 		bgPanel.add(label2);
@@ -179,3 +176,4 @@ public class SpecificDateView2 extends JFrame {
 		repaint();
 	}
 }
+
