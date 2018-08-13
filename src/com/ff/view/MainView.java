@@ -297,7 +297,7 @@ public class MainView extends JFrame {
 		btn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				view3Controller = new SpecificDateController();
+				view3Controller = SpecificDateController.getInstance();
 				view3Controller.viewShow();
 			}
 		});
@@ -323,7 +323,7 @@ public class MainView extends JFrame {
 		    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/rain.jpg"));
 		    	  }else{
 		    		  //backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_SKY_IMG));
-		    		  backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/back.jpg"));
+		    		  backgroundImage = javax.imageio.ImageIO.read(new File(CommonStatic.BACKGROUND_MAIN_IMG));
 		    	  }
 	    	  
 	          setContentPane(new JPanel(new BorderLayout()) {
