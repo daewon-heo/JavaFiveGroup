@@ -23,7 +23,6 @@ import com.ff.controller.SpecificDateController;
 import com.ff.controller.TodayStyleController;
 import com.ff.model.CommonStatic;
 
-import develop.TestLoading;
 import develop.Weather;
 
 public class MainView extends JFrame {
@@ -62,17 +61,25 @@ public class MainView extends JFrame {
 	}
 	
 	public void loadingView(){
+		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
+		loadingLabel = new JLabel(imageIcon);
+    	add(loadingLabel);
     	
+    	JLabel lb = new JLabel();
+    	try {
+			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
+		} catch (IOException e1) {
+			System.out.println("이미지파일 오류 발생");
+		}
+    	setBounds(500, 250, 700, 600);
+    	setVisible(true);
 	}
 	
 
 	public void init() {
-		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
-    	loadingLabel = new JLabel(imageIcon);
-    	add(loadingLabel);
-    	JLabel lb = new JLabel();
-    	setBounds(500, 250, 700, 600);
-    	setVisible(true);
+		backGrounImg1();
+		loadingView();
+
     	
 		mc.getDatas();
 		setLayout(null);
@@ -91,30 +98,31 @@ public class MainView extends JFrame {
 		JLabel end = new JLabel();
 		
 		Image backg = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG).getImage().getScaledInstance(700, 600, 50);
-        Image myImg = new ImageIcon("datas/images/main/button1.png").getImage().getScaledInstance(120,35, 0);
+        Image myImg = new ImageIcon("datas/images/main/button1.png").getImage().getScaledInstance(160,35, 0);
         
         // 메뉴 버튼
         initView();
 		
-		
-        
+	
         btn1 = new JButton(new ImageIcon(myImg));
         btn1.setFocusPainted(false); 
         btn1.setContentAreaFilled(false);
         btn1.setBorderPainted(false);
+
         
-        myImg = new ImageIcon("datas/images/main/button2.png").getImage().getScaledInstance(125, 35 , 0);
+        myImg = new ImageIcon("datas/images/main/button2.png").getImage().getScaledInstance(160, 35 , 0);
         btn2 = new JButton(new ImageIcon(myImg));
         btn2.setFocusPainted(false); 
         btn2.setContentAreaFilled(false);
         btn2.setBorderPainted(false);
-        
+
      
-        myImg = new ImageIcon("datas/images/main/button3.png").getImage().getScaledInstance(125, 35 , 0);
+        myImg = new ImageIcon("datas/images/main/button3.png").getImage().getScaledInstance(160, 35 , 0);
         btn3 = new JButton(new ImageIcon(myImg));
         btn3.setFocusPainted(false); 
         btn3.setContentAreaFilled(false);
         btn3.setBorderPainted(false);
+
         
         // 날짜
         JLabel today = new JLabel();
@@ -145,14 +153,29 @@ public class MainView extends JFrame {
         lowTem.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         
         // 상대 습도
-        JLabel humidity = new JLabel("최고온도");
-        humidity.setText(mc.getHumidity());
+        JLabel humidityName = new JLabel("습도");
+        humidityName.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+        JLabel humidity = new JLabel();
+        humidity.setText(mc.getHumidity()+"%");
+        humidity.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         
         // 메인 아이콘
         Image mainImage = new ImageIcon("datas/images/"+ mc.getIconName()+".png").getImage().getScaledInstance(300, 300, 0);
         JLabel mainIcon = new JLabel(new ImageIcon(mainImage));
        
-       
+        // 메뉴 아이콘
+        Image menu1Image = new ImageIcon("datas/images/main/analysis.png").getImage().getScaledInstance(40, 40, 0);
+        JLabel menu1Icon = new JLabel(new ImageIcon(menu1Image));
+        Image menu2Image = new ImageIcon("datas/images/main/tie.png").getImage().getScaledInstance(40, 40, 0);
+        JLabel menu2Icon = new JLabel(new ImageIcon(menu2Image));
+        Image menu3Image = new ImageIcon("datas/images/main/appointment.png").getImage().getScaledInstance(40, 40, 0);
+        JLabel menu3Icon = new JLabel(new ImageIcon(menu3Image));
+        
+        // 최고 최저 온도
+        Image highImage = new ImageIcon("datas/images/main/high.png").getImage().getScaledInstance(80, 80, 0);
+        JLabel highIcon = new JLabel(new ImageIcon(highImage));
+        Image lowImage = new ImageIcon("datas/images/main/low.png").getImage().getScaledInstance(80, 80, 0);
+        JLabel lowIcon = new JLabel(new ImageIcon(lowImage));
        
         
         // 글씨 위치 조정
@@ -162,16 +185,25 @@ public class MainView extends JFrame {
         nowTem.setBounds(280, 410, 350, 100);
         
         highTem.setBounds(550, 260, 350, 100);
-        highTemName.setBounds(540, 220, 350, 100);
-        lowTem.setBounds(60, 260, 350, 100);
-        lowTemName.setBounds(60, 220, 350, 100);
+        highTemName.setBounds(550, 220, 350, 100);
+        highIcon.setBounds( 465 ,250 , 80, 80);
+        lowTem.setBounds(90, 260, 350, 100);
+        lowTemName.setBounds(130, 220, 350, 100);
+        lowIcon.setBounds( 2, 250 , 80, 80);
         
-        lowTemName.setLocation(60, 220);
+        humidityName.setBounds(600,400,100,100);
+        humidity.setBounds(600,500,100,100);
+        
+        
+        lowTemName.setLocation(90, 220);
         
         // 버튼 위치 조정
-        btn1.setBounds(100, 0, 145, 50);
-        btn2.setBounds(250,0,145,50);
-        btn3.setBounds(400,0,145,50);
+        btn1.setBounds(90, 0, 150, 50);
+        btn2.setBounds(300,0,150,50);
+        btn3.setBounds(510,0,150,50);
+        menu1Icon.setBounds(50, 5, 40, 40);
+        menu2Icon.setBounds(260, 5, 40, 40);
+        menu3Icon.setBounds(470, 5, 40, 40);
         
         addListener();
         addComponent();
@@ -180,19 +212,30 @@ public class MainView extends JFrame {
         add(btn1);
         add(btn2);
         add(btn3);
+        add(menu1Icon);
+        add(menu2Icon);
+        add(menu3Icon);
+        
         add(mainIcon);
         add(today);
         add(lowTemName);
         add(highTemName);
         
+
+        
         add(day);
+        add(highIcon);
+        add(lowIcon);
         add(nowTem);
         add(highTem);
         add(lowTem);
+        
+//        add(humidityName);
+//        add(humidity);
         add(end);
         
         
-    
+
 		setBounds(500, 250, 700, 600);
 		setResizable(false);
 		setVisible(true);
@@ -219,7 +262,7 @@ public class MainView extends JFrame {
 		btn1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				loadingView();
 				view1Controller = new PastWeatherController();
 				view1Controller.viewShow();
 			}

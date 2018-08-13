@@ -23,9 +23,9 @@ public class MainController {
 	private String iconName;
 	
 
-	/*public MainController(){
+	
 
-	public MainController(){
+	/*public MainController(){
 
 		cal = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재시간
@@ -56,6 +56,7 @@ public class MainController {
 		System.out.println(cal.get(Calendar.DATE) +",,"+ ((cal.get(Calendar.MONTH))+1) );
 		System.out.println("기온" +  nowTem);
 		humidity = Weather.GetPastWeather("108", cal.getWeekYear(), "12")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+		System.out.println("습도"+humidity);
 	}
 	
 	
