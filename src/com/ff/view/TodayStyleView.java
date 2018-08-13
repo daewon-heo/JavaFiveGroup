@@ -133,8 +133,7 @@ public class TodayStyleView extends JFrame {
 	public void initView(String fileName) {
 		
 		tsc.weather();
-		setBounds(500, 200, 500, 500);
-		setSize(450, 780);
+		setBounds(500, 200, 450, 780);
 		setLocationRelativeTo(null);
 		//setLayout(new GridLayout());
 		setResizable(false);
