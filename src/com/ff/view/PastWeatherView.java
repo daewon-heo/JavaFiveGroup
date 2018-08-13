@@ -24,18 +24,20 @@ public class PastWeatherView extends JFrame {
 	/**
 	 * 
 	 */
+	
+	private PastWeatherController pwc = new PastWeatherController();
 	private static final long serialVersionUID = -5581181417128426852L;
 	
-	public PastWeatherView(String pastIcon, String presentIcon, String temperature, String humidity, String ta, String hm){
+	public PastWeatherView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm){
 		super("작년의 오늘 날씨와 현재 날씨");
 		
 		initView(pastIcon , presentIcon ,temperature, humidity, ta, hm);
 		
 	}
 	
-	public void initView(String pastIcon, String presentIcon, String temperature, String humidity, String ta, String hm) {
+	public void initView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm) {
 		
-		setBounds(300, 300, 710, 624);
+		setBounds(300, 300, 710, 618);
 		setLayout(new BorderLayout());
 		
 		try {
@@ -51,22 +53,22 @@ public class PastWeatherView extends JFrame {
 		
 		JLabel titleLb1 = new JLabel("작년의 오늘 날씨");
 		JLabel titleLb2 = new JLabel("현재 날씨");
-		JLabel compareLb = new JLabel(new PastWeatherController().compareTemperature());
+		JLabel compareLb = new JLabel(pwc.compareTemperature());
 		
 		Image pastWeatherIcon = new ImageIcon(pastIcon).getImage()
-				.getScaledInstance(180, 180, 0);
+				.getScaledInstance(200, 200, 0);
 		
 		Image presentWeaterIcon = new ImageIcon(presentIcon).getImage()
-				.getScaledInstance(180, 180, 0);
+				.getScaledInstance(200, 200, 0);
 		
 		JLabel iconLb1 = new JLabel(new ImageIcon(pastWeatherIcon));
 		
 		JLabel iconLb2 = new JLabel(new ImageIcon(presentWeaterIcon));
 		
-		JLabel pastTemperature = new JLabel(temperature);
+		JLabel pastTemperature = new JLabel(temperature+" ℃");
 		JLabel pastHumidity = new JLabel(humidity);
 		
-		JLabel presentTemperature = new JLabel(ta);
+		JLabel presentTemperature = new JLabel(ta+" ℃");
 		JLabel presentHumidity = new JLabel(hm);
 		
 		pan1.setLayout(null);
@@ -117,9 +119,9 @@ public class PastWeatherView extends JFrame {
 		
 		
 		iconLb1.setLocation(85, 85);
-		iconLb1.setSize(180, 180);
+		iconLb1.setSize(200, 200);
 		iconLb2.setLocation(440, 85);
-		iconLb2.setSize(180, 180);
+		iconLb2.setSize(200, 200);
 		
 		pan1.add(titleLb1);
 		pan1.add(iconLb1);

@@ -11,13 +11,15 @@ import develop.Weather;
 
 public class PastWeatherController {
 	
-	private boolean isRain;
+	private static double temperature;
+	private static double ta;
 	private PastWeatherView view1View = null;
+	private PastWeatherController pwc;
 	
 	public PastWeatherController(){
 		
 	}
-	
+
 	public void viewShow() {
 		
 		getWeatherData();
@@ -26,6 +28,7 @@ public class PastWeatherController {
 	
 	public void getWeatherData(){
 		
+		System.out.println("getWeather");
 		// ================== 과거 날씨로 아이콘 가져오기
 		Calendar cal = new GregorianCalendar();
 		
@@ -35,7 +38,7 @@ public class PastWeatherController {
 		
 		String[][] datas1 = Weather.GetPastWeather("108", year-1, "90");
 		
-		System.out.printf("%d년 %d월 %d일", year-1, month, day);
+		System.out.printf("%d년 %d월 %d일\n", year-1, month, day);
 		
 		int num = pastWeather(datas1[day][month]);
 		
@@ -43,13 +46,13 @@ public class PastWeatherController {
 		
 		// ================== 작년 최고 온도
 		String[][] datas2 = Weather.GetPastWeather("108", year-1, "08");
-		String temperature = datas2[day][month] + " ℃";
-		System.out.println(temperature + " ℃");
+		temperature = Double.parseDouble(datas2[day][month]);
+		System.out.println("작년 최고온도  : "+temperature + " ℃");
 		
 		// ================== 작년 습도
 		String[][] datas3 = Weather.GetPastWeather("108", year-1, "12");
 		String humidity = datas3[day][month] +" %";
-		System.out.println(humidity +" %");
+		System.out.println("작년 습도 : " + humidity +" %");
 		
 		// ================== 현재 날씨로 아이콘 가져오기
 		Map temp = new HashMap();
@@ -63,7 +66,7 @@ public class PastWeatherController {
 		String presentIcon = weatherIcon(g);
 		
 		// ================== 현재 온도
-		String ta = temp.get("기온") + " ℃";
+		ta = Double.parseDouble((String) temp.get("기온"));
 		// ================== 현재 습도
 		String hm = temp.get("습도") +" %";
 		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
@@ -71,18 +74,18 @@ public class PastWeatherController {
 		
 	}
 	
-	public String compareTemperature(){
+	public static String compareTemperature(){
 		// 작년 온도와 현재 온도를 비교해서
 		// 현재 온도가 작년보다 얼마나 높거나 낮은지 리턴 해준다.
+		System.out.println("compareTemperature()");
 		String str = "";
-		// if( 작년온도 > 현재온도){
-		//		str = "오늘이 작년보다 "+" 도 더 낮습니다.";
-		// } else if ( 작년온도 == 현재온도){
-		// 		str = "오늘은 작년과 같은 온도 입니다.";
-		// } else {
-		// 		str = "오늘이 작년보다 "+" 도 더 높습니다.";
-		// }
-			str = "오늘이 작년보다 "+" 도 더 낮습니다.";
+		 if( temperature > ta){
+				str += "오늘이 작년보다 "+(ta-temperature)+" 도 더 낮습니다.";
+		 } else if ( temperature < ta ){
+		 		str += "오늘이 작년보다 "+(ta-temperature)+" 도 더 높습니다.";
+		 } else {
+		 		str += "오늘은 작년과 온도가 같습니다.";
+		 }
 		return str;
 	}
 	
@@ -149,4 +152,5 @@ public class PastWeatherController {
 	
 		return result;
 	}
+	
 }
