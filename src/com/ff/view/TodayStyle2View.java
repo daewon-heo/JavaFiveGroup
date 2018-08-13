@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -19,16 +21,38 @@ import javax.swing.JPanel;
 
 public class TodayStyle2View extends JFrame {
 	private static final long serialVersionUID = 781983372302967463L;
-
-	public TodayStyle2View(){
+	
+	private static TodayStyle2View instance = null;
+	
+	private JButton[] btnArr = null;
+	private Image[] picArr = null;
+	private String[] pathArr = null;
+	
+	public static TodayStyle2View getInstance() {
+		if(instance == null)
+			instance = new TodayStyle2View();
+		
+		if(!instance.isVisible())
+			instance.setVisible(true);
+		
+		return instance;
+	}
+	
+	private TodayStyle2View(){
 		super("스타일 더보기");
 		subView();
 		
 	}
-	//setFocusPainted
 	
-	//setContentAreaFilled
-	//setBoarderPainted
+	public void addListener() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				instance = null;
+			}
+		});
+		
+	}
 	
 	public void subView(){
 		setBounds(500, 200, 500, 500);
@@ -36,20 +60,13 @@ public class TodayStyle2View extends JFrame {
 		setLocationRelativeTo(null);
 		setLayout(new GridLayout());
 //		setResizable(false);
-		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
 		JPanel panel = new JPanel(new GridLayout(3, 3));
 		setContentPane(panel);
-
 		setVisible(true);
 
 		
 		nineImg(getSeason(), panel);
-
-
-
-
 		pack();
 		setMinimumSize(getPreferredSize());
 		
@@ -98,184 +115,114 @@ public class TodayStyle2View extends JFrame {
 		}
 		return sSeason;
 	}
-	
-	public void nineImg(String season, JPanel panel){
+public void nineImg(String season, JPanel panel){
 		
 		String path = "datas/images/style/" + season + "/";
 		
-		JButton btn1 = new JButton();
-		JButton btn2 = new JButton();
-		JButton btn3 = new JButton();
-		JButton btn4 = new JButton();
-		JButton btn5 = new JButton();
-		JButton btn6 = new JButton();
-		JButton btn7 = new JButton();
-		JButton btn8 = new JButton();
-		JButton btn9 = new JButton();
+		btnArr = new JButton[9];
+		picArr = new Image[9];
+		pathArr = new String[9];
+		
+		for (int i = 0; i < pathArr.length; i++) {
+			pathArr[i] = path + (i+1) + ".jpg";
+		}
+		
+		for (int i = 0; i < btnArr.length; i++) {
+			btnArr[i] = new JButton();
+		}
 		
 		try {
-		    Image myPicture1 = new ImageIcon(path +  "1" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture2 = new ImageIcon(path +  "2" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture3 = new ImageIcon(path +  "3" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture4 = new ImageIcon(path +  "4" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture5 = new ImageIcon(path +  "5" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture6 = new ImageIcon(path +  "6" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture7 = new ImageIcon(path +  "7" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture8 = new ImageIcon(path +  "8" +".jpg").getImage().getScaledInstance(150, 260, 0);
-		    Image myPicture9 = new ImageIcon(path +  "9" +".jpg").getImage().getScaledInstance(150, 260, 0);
+			for (int i = 0; i < picArr.length; i++) {
+				picArr[i] = new ImageIcon(pathArr[i]).getImage().getScaledInstance(150, 260, 0);
+			}
 
+		    for (int i = 0; i < btnArr.length; i++) {
+				btnArr[i].setIcon(new ImageIcon(picArr[i]));
+			}
 		    
-		    btn1.setBackground(Color.WHITE);
-		    btn2.setBackground(Color.WHITE);
-		    btn3.setBackground(Color.WHITE);
-		    btn4.setBackground(Color.WHITE);
-		    btn5.setBackground(Color.WHITE);
-		    btn6.setBackground(Color.WHITE);
-		    btn7.setBackground(Color.WHITE);
-		    btn8.setBackground(Color.WHITE);
-		    btn9.setBackground(Color.WHITE);
-		    
-		    btn1.setIcon(new ImageIcon(myPicture1));
-		    btn2.setIcon(new ImageIcon(myPicture2));
-		    btn3.setIcon(new ImageIcon(myPicture3));
-		    btn4.setIcon(new ImageIcon(myPicture4));
-		    btn5.setIcon(new ImageIcon(myPicture5));
-		    btn6.setIcon(new ImageIcon(myPicture6));
-		    btn7.setIcon(new ImageIcon(myPicture7));
-		    btn8.setIcon(new ImageIcon(myPicture8));
-		    btn9.setIcon(new ImageIcon(myPicture9));
-		    
-			btn1.addActionListener(new ActionListener() {
+		    addBtnActionListener();
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-
-			btn2.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					
-
-				}
-			});
-			btn3.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-
-			btn4.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-
-			btn5.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-
-			btn6.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-
-			btn7.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-
-			btn8.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-			btn9.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-		    /*btn1.setBorderPainted(false);
-		    btn1.setFocusPainted(false);
-		    btn1.setContentAreaFilled(false);
-		    
-		    btn2.setBorderPainted(false);
-		    btn2.setFocusPainted(false);
-		    btn2.setContentAreaFilled(false);
-		    
-		    btn3.setBorderPainted(false);
-		    btn3.setFocusPainted(false);
-		    btn3.setContentAreaFilled(false);
-		    
-		    btn4.setBorderPainted(false);
-		    btn4.setFocusPainted(false);
-		    btn4.setContentAreaFilled(false);
-		    
-		    btn5.setBorderPainted(false);
-		    btn5.setFocusPainted(false);
-		    btn5.setContentAreaFilled(false);
-		    
-		    btn6.setBorderPainted(false);
-		    btn6.setFocusPainted(false);
-		    btn6.setContentAreaFilled(false);
-		    
-		    btn7.setBorderPainted(false);
-		    btn7.setFocusPainted(false);
-		    btn7.setContentAreaFilled(false);
-		    
-		    btn8.setBorderPainted(false);
-		    btn8.setFocusPainted(false);
-		    btn8.setContentAreaFilled(false);
-		    
-		    btn9.setBorderPainted(false);
-		    btn9.setFocusPainted(false);
-		    btn9.setContentAreaFilled(false);*/
-		  //setFocusPainted
-			
-			//setContentAreaFilled
-			//setBoarderPainted
-		    
-		    panel.add(btn1);
-		    panel.add(btn2);
-		    panel.add(btn3);
-		    panel.add(btn4);
-		    panel.add(btn5);
-		    panel.add(btn6);
-		    panel.add(btn7);
-		    panel.add(btn8);
-		    panel.add(btn9);
+		    for (int i = 0; i < btnArr.length; i++) {
+				panel.add(btnArr[i]);
+			}
 		    
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-		
 	}
+	
+	public void addBtnActionListener() {
+		btnArr[0].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[0]);
+			}
+		});
+		
+		btnArr[1].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[1]);
+			}
+		});
+		
+		btnArr[2].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[2]);
+			}
+		});
+		
+		btnArr[3].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[3]);
+			}
+		});
+		
+		btnArr[4].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[4]);
+			}
+		});
+		
+		btnArr[5].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[5]);
+			}
+		});
+		
+		btnArr[6].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[6]);
+			}
+		});
+		
+		btnArr[7].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[7]);
+			}
+		});
+		
+		btnArr[8].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TodayStyleView view1 = TodayStyleView.getInstance(); 
+				view1.setBackImg(pathArr[8]);
+			}
+		});
+	}
+	
 }

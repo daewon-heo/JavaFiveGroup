@@ -10,7 +10,14 @@ import com.ff.view.TodayStyleView;
 import develop.Weather;
 
 public class TodayStyleController {
+	
 	TodayStyleView TodayStyleView = null;
+	
+	private static TodayStyleController instance = null;
+	
+	private TodayStyleController(){
+		
+	}
 	
 	private String nowTem;		 // 현재 기온
 	private String region;      // 지역
@@ -58,19 +65,21 @@ public class TodayStyleController {
 	public void setLow(String low) {
 		this.low = low;
 	}
-
-	public TodayStyleController(){
-		
+	
+	
+	public static TodayStyleController getInstance() {
+		if(instance == null)
+			instance = new TodayStyleController();
+		return instance;
 	}
 	
 	public void viewShow() {
-		TodayStyleView = new TodayStyleView(randStyle());
+		TodayStyleView = TodayStyleView.getInstance(seasonStyle());
 		
-//		String[][] datas = Weather.GetPastWeather("108", 2018, "08");
-//		TodayStyleView.dataView(datas);
 	}
+
 	
-	public String randStyle(){
+	public String seasonStyle(){
 		Calendar cal = new GregorianCalendar();
 		int iSeason = cal.get(Calendar.MONTH) +1;
 		System.out.println("현재 월 : " + iSeason);
@@ -113,13 +122,10 @@ public class TodayStyleController {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("E요일, MM월 dd일");
 		nowTem = awsMap.get("기온");
-		region = awsMap.get("지점번호");
+		region = "서울";
 		today = sdf.format(cal.getTime());
 		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
-		
-		/*System.out.println(awsMap);
-		System.out.println("현재 기온 : " + awsMap.get("기온"));
-		System.out.println("강수감지 : " + awsMap.get("강수감지"));*/
-	}
+	
+ }
 }
