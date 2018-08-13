@@ -46,7 +46,7 @@ public class MainView extends JFrame {
 	
 	public MainView(){
 		super("날씨 봐라");
-		loadingView();
+		//loadingView();
 		
 		init();
 		
@@ -66,7 +66,6 @@ public class MainView extends JFrame {
 		loadingLabel = new JLabel(imageIcon);
     	add(loadingLabel);
     	
-    	JLabel lb = new JLabel();
     	try {
 			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
 		} catch (IOException e1) {
@@ -78,13 +77,29 @@ public class MainView extends JFrame {
 	
 
 	public void init() {
+		//backGrounImg1();
+		//loadingView();
+		
+		JPanel ldpan = new JPanel();
 		backGrounImg1();
-		loadingView();
+		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
+		loadingLabel = new JLabel(imageIcon);
+    	add(loadingLabel);
 
+    	try {
+			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
+		} catch (IOException e1) {
+			System.out.println("이미지파일 오류 발생");
+		}
     	
-		mc.getDatas();
+    	setBounds(500, 250, 700, 600);
+    	setVisible(true);
+    	
+    	mc.getDatas();
+
 		setLayout(null);
 		backGrounImg1();
+		
 		
 		ImageIcon icon = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG);
         
@@ -99,7 +114,7 @@ public class MainView extends JFrame {
 		JLabel end = new JLabel();
 		
 		Image backg = new ImageIcon(CommonStatic.BACKGROUND_SKY_IMG).getImage().getScaledInstance(700, 600, 50);
-        Image myImg = new ImageIcon("datas/images/main/button1.png").getImage().getScaledInstance(160,35, 0);
+        Image myImg = new ImageIcon("datas/images/main/button1.png").getImage();
         
         // 메뉴 버튼
         initView();
@@ -111,14 +126,14 @@ public class MainView extends JFrame {
         btn1.setBorderPainted(false);
 
         
-        myImg = new ImageIcon("datas/images/main/button2.png").getImage().getScaledInstance(160, 35 , 0);
+        myImg = new ImageIcon("datas/images/main/button2.png").getImage();
         btn2 = new JButton(new ImageIcon(myImg));
         btn2.setFocusPainted(false); 
         btn2.setContentAreaFilled(false);
         btn2.setBorderPainted(false);
 
      
-        myImg = new ImageIcon("datas/images/main/button3.png").getImage().getScaledInstance(160, 35 , 0);
+        myImg = new ImageIcon("datas/images/main/button3.png").getImage();
         btn3 = new JButton(new ImageIcon(myImg));
         btn3.setFocusPainted(false); 
         btn3.setContentAreaFilled(false);
@@ -199,11 +214,11 @@ public class MainView extends JFrame {
         lowTemName.setLocation(90, 220);
         
         // 버튼 위치 조정
-        btn1.setBounds(90, 0, 150, 50);
-        btn2.setBounds(300,0,150,50);
-        btn3.setBounds(510,0,150,50);
-        menu1Icon.setBounds(50, 5, 40, 40);
-        menu2Icon.setBounds(260, 5, 40, 40);
+        btn1.setBounds(70, 0, 170, 50);
+        btn2.setBounds(295,0,160,50);
+        btn3.setBounds(510,0,170,50);
+        menu1Icon.setBounds(30, 5, 40, 40);
+        menu2Icon.setBounds(255, 5, 40, 40);
         menu3Icon.setBounds(470, 5, 40, 40);
         
         addListener();
@@ -237,9 +252,11 @@ public class MainView extends JFrame {
         
         
 
-		setBounds(500, 250, 700, 600);
+		//setBounds(500, 250, 700, 600);
 		setResizable(false);
-		setVisible(true);
+		//setVisible(true);
+		
+		repaint();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
