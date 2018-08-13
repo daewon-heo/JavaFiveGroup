@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -109,29 +110,34 @@ public class PastWeatherView extends JFrame {
 		titleLb1.setFont(titleLb1.getFont().deriveFont(20.0f));
 		titleLb1.setLocation(95, 10);
 		titleLb1.setSize(300,30);
+		
 		titleLb2.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		titleLb2.setFont(titleLb2.getFont().deriveFont(20.0f));
 		titleLb2.setLocation(490,10);
 		titleLb2.setSize(300,30);
+		
 		compareLb.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		compareLb.setFont(compareLb.getFont().deriveFont(20.0f));
+		
 		pastTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		pastTemperature.setFont(pastTemperature.getFont().deriveFont(35.0f));
 		pastTemperature.setLocation(130, 350);
 		pastTemperature.setSize(120,30);
+		
 		pastHumidity.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		pastHumidity.setFont(pastHumidity.getFont().deriveFont(35.0f));
 		pastHumidity.setLocation(130, 420);
 		pastHumidity.setSize(120,30);
+		
 		presentTemperature.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		presentTemperature.setFont(presentTemperature.getFont().deriveFont(35.0f));
 		presentTemperature.setLocation(485, 350);
 		presentTemperature.setSize(120,30);
+		
 		presentHumidity.setFont(new Font("맑은 고딕", Font.BOLD, 11));
 		presentHumidity.setFont(presentHumidity.getFont().deriveFont(35.0f));
 		presentHumidity.setLocation(485, 420);
 		presentHumidity.setSize(120,30);
-		
 		
 		iconLb1.setLocation(80, 85);
 		iconLb1.setSize(200, 200);
@@ -147,7 +153,6 @@ public class PastWeatherView extends JFrame {
 		pan2.add(presentTemperature);
 		pan2.add(presentHumidity);
 		pan3.add(compareLb);
-		
 		
 		add(pan1);
 		add(pan2);

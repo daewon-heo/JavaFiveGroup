@@ -66,7 +66,11 @@ public class PastWeatherController {
 		String presentIcon = weatherIcon(g);
 		
 		// ================== 현재 온도
+		try{
 		ta = Double.parseDouble((String) temp.get("기온"));
+		} catch(NumberFormatException e){
+			System.out.println("트래픽이 1000건을 초과해서 기온과 습도를 불러올수 없습니다.");
+		}
 		// ================== 현재 습도
 		String hm = temp.get("습도") +" %";
 		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
