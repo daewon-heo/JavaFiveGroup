@@ -20,4 +20,11 @@ public class SpecificDateController2 {
 	public void viewShow() {
 		specificdateView = SpecificDateView2.getInstance();
 	}
+	
+	public String[][] getPastWeather(){
+		String[][] datas = {{" ",	"1월",	"2월"},
+							{"1일",	"10",	"20"},
+							{"2일",	"30","20"}};
+		return datas;
+	}
 }
