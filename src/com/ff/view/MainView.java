@@ -57,9 +57,7 @@ public class MainView extends JFrame {
 		//loadingView();
 		
 		init();
-		
-		
-		
+
 		String[][] str = getPastWeather();	// 과거 날씨 데이터 가져오기
 	}
 	
@@ -310,7 +308,7 @@ public class MainView extends JFrame {
 		btn3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				view3Controller = new SpecificDateController();
+				view3Controller = SpecificDateController.getInstance();
 				view3Controller.viewShow();
 			}
 		});
@@ -320,6 +318,7 @@ public class MainView extends JFrame {
 	
 	public void backGrounImg1(){
 		 
+
 
 		BufferedImage backgroundImage;
 		try {
@@ -345,7 +344,8 @@ public class MainView extends JFrame {
 
 		}
 	}
-	  
+
+		
 	
 	public void annotation(){
 		// 로딩화면
