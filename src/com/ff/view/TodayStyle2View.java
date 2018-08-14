@@ -1,7 +1,6 @@
 package com.ff.view;
 
-import java.awt.Color;
-import java.awt.GridLayout;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,13 +15,15 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.ff.model.CommonStatic;
 
 public class TodayStyle2View extends JFrame {
 	private static final long serialVersionUID = 781983372302967463L;
 	
 	private static TodayStyle2View instance = null;
+	
 	
 	private JButton[] btnArr = null;
 	private Image[] picArr = null;
@@ -55,28 +56,18 @@ public class TodayStyle2View extends JFrame {
 	}
 	
 	public void subView(){
-		//setBounds(500, 200, 500, 500);
-		//setSize(350, 700);
-		//setLocationRelativeTo(null);
 		setLayout(null);
-		setBounds(970, 200, 470, 820);
-//		setResizable(false);
+		setBounds(970, 200, 460, 812);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel panel = new JPanel(null);
-		//panel.setBounds(970, 500, 700, 800);
 		setContentPane(panel);
-//		getContentPane().setBounds(600,200,350,700);
-	
-		setVisible(true);
-		
-		
 		nineImg(getSeason(), panel);
-//		pack();
-//		setMinimumSize(getPreferredSize());
-		
+		setVisible(true);
+
 		try {
-			setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
 			
+			setIconImage(ImageIO.read(new File(CommonStatic.TODAY_STYLE_ICON)));
 
 		} catch (IOException e) {
 		
@@ -85,6 +76,8 @@ public class TodayStyle2View extends JFrame {
 		
 		
 	}
+	
+	
 	
 	public String getSeason(){
 		Calendar cal = new GregorianCalendar();
@@ -119,6 +112,7 @@ public class TodayStyle2View extends JFrame {
 		}
 		return sSeason;
 	}
+	
 public void nineImg(String season, JPanel panel){
 		
 		String path = "datas/images/style/" + season + "/";
@@ -143,7 +137,6 @@ public void nineImg(String season, JPanel panel){
 
 		    for (int i = 0; i < btnArr.length; i++) {
 				btnArr[i].setIcon(new ImageIcon(picArr[i]));
-				btnArr[i].setBackground(Color.WHITE);
 				
 				btnArr[0].setBounds(1, 1, 150, 260);
 				btnArr[1].setBounds(152, 1, 150, 260);
@@ -241,5 +234,6 @@ public void nineImg(String season, JPanel panel){
 			}
 		});
 	}
+	
 	
 }

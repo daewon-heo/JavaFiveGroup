@@ -1,11 +1,13 @@
 package com.ff.view;
 
+
+
 import java.awt.Color;
 import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -20,7 +22,7 @@ import javax.swing.JPanel;
 
 import com.ff.controller.TodayStyle2Controller;
 import com.ff.controller.TodayStyleController;
-import com.ff.controller.TodayStyleController2;
+
 import com.ff.model.CommonStatic;
 
 public class TodayStyleView extends JFrame {
@@ -38,8 +40,6 @@ public class TodayStyleView extends JFrame {
 	private JLabel bgLabel = null;
 	private JButton moreViewBtn = null;
 	
-	
-	
 	public static TodayStyleView getInstance() {
 		return instance;
 	}
@@ -55,27 +55,82 @@ public class TodayStyleView extends JFrame {
 	}
 	
 	
-	
-	public TodayStyleView(String fileName){
+	private TodayStyleView(String fileName){
 		super("이런 스타일 어때요?");
 		initView(fileName);
 		initComponent();
 		addListener();
 		setBackImg(fileName);
+		
 	}
 	
 	public void dataView(String[][] datas){
 
 	}
 	public void setBackImg(String fileName) {
-		bgPanel.remove(bgLabel);
+		
+		bgPanel.remove(bgLabel); // 스타일 더보기 창에서 버튼 클릭시 원래 라벨 지우는것
 		bgLabel = new JLabel(new ImageIcon(fileName));
 		bgLabel.setLocation(0, 0);
-		bgLabel.setSize(450, 800);
+		bgLabel.setSize(450, 780);
 		bgPanel.add(bgLabel);
 		refresh();
 		
 		bgPanel.setLayout(null);
+		
+		JLabel temper;	
+		JLabel region;
+		JLabel today;
+		JLabel high;
+		JLabel low;	
+		
+		
+        temper = new JLabel();
+        temper.setText(tsc.getNowTem()+"℃");
+        temper.setForeground(Color.WHITE);
+        temper.setFont(new Font("Fixedsys",Font.BOLD, 20));
+        temper.setBounds(30, 575, 130, 25);	
+		this.getContentPane().add(temper);
+      
+		
+		region = new JLabel();
+		region.setText(tsc.getRegion());
+		region.setForeground(Color.WHITE);
+		region.setFont(new Font("Fixedsys",Font.BOLD, 20));
+		region.setBounds(30, 605, 130, 25);	
+		this.getContentPane().add(region);
+		
+		today = new JLabel();
+		today.setText(tsc.getToday());
+		today.setForeground(Color.WHITE);	
+		today.setFont(new Font("Fixedsys",Font.BOLD, 20));
+        today.setBounds(30, 640, 180, 25);
+		this.getContentPane().add(today);
+
+		high = new JLabel();
+		high.setText("Highs: "+tsc.getHigh()+"℃");
+		high.setForeground(Color.WHITE);	
+		high.setFont(new Font("Fixedsys",Font.BOLD, 20));
+		high.setBounds(30, 675, 130, 25);
+		this.getContentPane().add(high);
+
+		low = new JLabel();
+		low.setText("Lows: "+tsc.getLow()+"℃");
+		low.setForeground(Color.WHITE);	
+		low.setFont(new Font("Fixedsys",Font.BOLD, 20));
+        low.setBounds(30, 705, 130, 25);	
+		this.getContentPane().add(low);	
+		
+	
+		
+		add(bgPanel);
+	}
+
+	public void setWeatherInfo(){
+		
+		tsc.weather();
+		bgPanel.setLayout(null);
+		
 		JLabel temper;	
 		JLabel region;
 		JLabel today;
@@ -131,18 +186,17 @@ public class TodayStyleView extends JFrame {
 	}
 	
 	public void initView(String fileName) {
+	
 		
 		tsc.weather();
 		setBounds(500, 200, 450, 780);
 		setLocationRelativeTo(null);
-		//setLayout(new GridLayout());
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-
 		try {
-			setIconImage(ImageIO.read(new File(CommonStatic.TODAY_STYLE_ICON)));
+			setIconImage(ImageIO.read(new File(CommonStatic.TODAY_STYLE_ICON)));//아이콘 이미지
 		} catch (IOException e) {
 			System.out.println("이미지 읽기 실패!");
 		}
@@ -150,7 +204,9 @@ public class TodayStyleView extends JFrame {
 		
 	}
 	
+	
 	public void initComponent(){
+		
 		bgPanel = new JPanel();
 		bgLabel = new JLabel();
 		add(bgPanel);
@@ -211,5 +267,8 @@ public class TodayStyleView extends JFrame {
 		System.out.println(stylePath);
 		return stylePath;
 	}
+	
+	
+ 
 	
 }
