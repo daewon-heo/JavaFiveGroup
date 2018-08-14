@@ -46,8 +46,9 @@ public class Weather {
 				final String serviceKey = "mxSeDzkLZPTloPLw9fu7PD5G62hSG92WD7NKwFOIs0QnrmQCUHaFtpOTlFzVTAvZ60Efsm22b%2Fhdm9tk66TT7g%3D%3D";
 
 				Calendar cal = new GregorianCalendar();
-				SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHH00"); // 현재시간
-//			System.out.println(sdf.format(cal.getTime()));
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmm"); // 현재시간
+				cal.add(Calendar.MINUTE, -10);
+//				System.out.println(sdf.format(cal.getTime()));
 
 				StringBuilder urlBuilder = new StringBuilder(awsApiUrl); 																	// URL
 				urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + serviceKey); 										// ServiceKey
