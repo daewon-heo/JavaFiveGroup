@@ -15,7 +15,6 @@ public class PastWeatherController {
 	private static double temperature;
 	private static double ta;
 	private PastWeatherView view1View = null;
-	private PastWeatherController pwc;
 	
 	public PastWeatherController(){
 		
@@ -23,6 +22,8 @@ public class PastWeatherController {
 
 	public void viewShow() {
 		
+		view1View = new PastWeatherView();
+		//view1View.loadingView();
 		getWeatherData();
 		
 	}
@@ -77,26 +78,28 @@ public class PastWeatherController {
 		String hm = temp.get("습도") +" %";
 		System.out.println("현재 습도 : " + hm);
 		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
-		view1View = new PastWeatherView(pastIcon, presentIcon, temperature, humidity, ta, hm);
+		
+		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm);
+		
 		
 	}
 	
 	public static String compareTemperature(){
 		// 작년 온도와 현재 온도를 비교해서
 		// 현재 온도가 작년보다 얼마나 높거나 낮은지 리턴 해준다.
-		String str = "";
+		String result = "";
 		
-		String tmp = "#.#";
-		DecimalFormat df = new DecimalFormat(tmp); 
+		String format = "#.#";
+		DecimalFormat df = new DecimalFormat(format); 
 		
 		if( temperature > ta){
-				str = "오늘이 작년보다 "+df.format((ta-temperature)*-1)+" ℃ 더 낮습니다.";
+				result = "오늘이 작년보다 "+ df.format((ta-temperature)*-1) +" ℃ 더 낮습니다.";
 		 } else if ( temperature < ta ){
-			 	str = "오늘이 작년보다 "+df.format((ta-temperature))+" ℃ 더 높습니다.";
+			 	result = "오늘이 작년보다 "+ df.format((ta-temperature)) +" ℃ 더 높습니다.";
 		 } else {
-		 		str = "오늘은 작년과 온도가 같습니다.";
+		 		result = "오늘은 작년과 온도가 같습니다.";
 		 }
-		return str;
+		return result;
 	}
 	
 	public String weatherIcon(int num){
