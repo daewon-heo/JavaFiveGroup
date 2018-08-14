@@ -118,25 +118,16 @@ public class SpecificDateView extends JFrame {
 
 				String date = textField.getText();
 				String result = checkDate(date);
+				System.out.println("result : " + result);
 
-				String str = "";
-				if (date.length() == 8) { // 숫자만 걸러내기
-					for (int i = 0; i < date.length(); i++) {
-						char ch = date.charAt(i);
-						if (ch >= '0' && ch <= '9')
-							str += ch;
-					}
-				}
-
-				
-				String strYear = str.substring(0, 4); // 년도 추출
-				int schYear = Integer.valueOf(strYear); // ex) 2018
-				
 				if (result.equals("")) {
+					int year = Integer.parseInt(textField.getText().substring(0,4));
 					loadingView();
-					new Thread(SpecificDateController.getInstance()).start();
+					new Thread(SpecificDateController.getInstance(year)).start();
 				} else {
 					area.setText(result);
+					swapPanel.add(area);
+					refresh();
 				}
 
 			}
@@ -234,6 +225,8 @@ public class SpecificDateView extends JFrame {
 			result = search;
 
 		}
+		
+		System.out.println("check date result : " + result);
 		return result;
 	}
 
@@ -247,8 +240,10 @@ public class SpecificDateView extends JFrame {
 		 * 
 		 * testarea 추가 하기
 		 */
+		
 		font = new Font("맑은 고딕", Font.BOLD, 12);
 		area = new JTextArea();
+		area.setText("");
 		area.setLocation(130, 370);
 		area.setSize(180, 150);
 		area.setEditable(false);
@@ -327,7 +322,7 @@ public class SpecificDateView extends JFrame {
 				SimpleDateFormat sdf = new SimpleDateFormat(" yyyy년 M월 d일 E요일 날씨\n");
 				cal.set(schYear, schMonth - 1, schDay);
 				String specific = sdf.format(cal.getTime());
-
+				
 				area.setText("");
 				area.append(specific);
 				area.append("      평균 온도  :\t" + datas1[schDay][schMonth].toString() + " ℃\n");
