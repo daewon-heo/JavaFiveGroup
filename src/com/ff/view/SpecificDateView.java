@@ -1,5 +1,6 @@
 package com.ff.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -34,7 +35,7 @@ public class SpecificDateView extends JFrame {
 	JPanel swapPanel = new JPanel();
 
 	JPanel loadingPanel = new JPanel();
-	ImageIcon loadingImg = new ImageIcon("datas/images/loading_2.gif");
+	ImageIcon loadingImg = new ImageIcon("datas/images/loading_3.gif");
 	JLabel loadingLabel = new JLabel(loadingImg);
 	JPanel resultPanel = new JPanel();
 
@@ -53,7 +54,7 @@ public class SpecificDateView extends JFrame {
 	}
 
 	private SpecificDateView() {
-		super("특정 날짜 조회");
+		super("이 날의 날씨가 궁금해!");
 		
 		initView();
 		
@@ -80,7 +81,7 @@ public class SpecificDateView extends JFrame {
 	public void initComponentAdd(){
 		bgPanel = new JPanel();
 		bgPanel.setLayout(null);
-		bgPanel.setBackground(Color.PINK);
+		bgPanel.setBackground(Color.white);
 		bgPanel.setBounds(0, 0, 450, 600);
 
 		ImageIcon image1 = new ImageIcon("datas/images/nalssibacloud.png"); // 화면 구름 이미지
@@ -213,12 +214,13 @@ public class SpecificDateView extends JFrame {
 		}
 		
 		loadingPanel.setVisible(true);
-		loadingPanel.setBackground(Color.RED);
+		loadingPanel.setBackground(Color.white);
 
-		loadingLabel.setBackground(Color.YELLOW);
+		loadingLabel.setBackground(Color.white);
 		
 		swapPanel.setVisible(true);
-		swapPanel.setBackground(Color.BLACK);
+		swapPanel.setBackground(Color.white);
+		resultPanel.setLayout(new BorderLayout());
 		swapPanel.add(resultPanel);
 		
 		font = new Font("맑은 고딕", Font.BOLD, 12);
@@ -229,7 +231,7 @@ public class SpecificDateView extends JFrame {
 		area.setEditable(false);
 		area.setFont(font);
 		area.setForeground(Color.blue);
-		area.setBackground(Color.GREEN);
+		area.setBackground(Color.white);
 		area.setVisible(true);
 
 		resultPanel.add(area);
@@ -239,6 +241,7 @@ public class SpecificDateView extends JFrame {
 			loadingPanel.setVisible(false);
 		}
 		resultPanel.setVisible(true);
+		
 		
 		String data = "";
 		for (int i = 0; i < datas.length; i++) {
