@@ -213,7 +213,7 @@ public class TodayStyleView extends JFrame {
 		bgPanel.setLayout(null);
 		
 		moreViewBtn = new JButton(new ImageIcon("datas/images/showmorepicbtn.png"));
-		moreViewBtn.setLocation(290, 710);
+		moreViewBtn.setLocation(295, 705);
 		moreViewBtn.setSize(130, 35);
 		bgPanel.add(moreViewBtn);
 	}
