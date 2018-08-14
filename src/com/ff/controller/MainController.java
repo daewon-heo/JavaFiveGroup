@@ -21,8 +21,8 @@ public class MainController {
 	private String today;	 // 오늘 날짜
 	private String day;
 	private String iconName = "sun";
-
-
+	private String nowState;
+	private String stateIcon;
 	
 
 	/*public MainController(){
@@ -59,6 +59,19 @@ public class MainController {
 
 		humidity = awsMap.get("습도") + "%";
 		System.out.println("습도"+humidity);
+		
+		double douNowTep = Double.parseDouble(nowTem);
+		int intNowTep = (int)douNowTep;
+		if(intNowTep >= 28){
+			nowState = "더워요";
+			stateIcon = "fire";
+		}else if(intNowTep >=16 && intNowTep < 28){
+			nowState = "적당해요";
+		}else if(intNowTep >= 8 && intNowTep <16){
+			nowState = "선선해요";
+		}else if(intNowTep <8){
+			nowState = "추워요";					
+		}
 		
 	}
 	
@@ -138,6 +151,13 @@ public class MainController {
 		return today;
 	}
 
+	public String getNowState(){
+		return nowState;
+	}
+	
+	public String getStateIcon(){
+		return stateIcon;
+	}
 
 
 	public void setCal(Calendar cal) {

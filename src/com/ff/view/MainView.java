@@ -197,6 +197,13 @@ public class MainView extends JFrame {
         humidity.setText(mc.getHumidity());
         humidity.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         
+        // 현재 상태
+        JLabel stateName = new JLabel("오늘은");
+        stateName.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+        JLabel state = new JLabel();
+        state.setText(mc.getNowState());
+        state.setFont(new Font("맑은 고딕", Font.BOLD, 35));
+        
         humidityName.setBounds(600,450,100,100);
         humidity.setBounds(590,490,150,100);
         
@@ -210,6 +217,9 @@ public class MainView extends JFrame {
         lowTemName.setBounds(130, 220, 350, 100);
         lowTemName.setLocation(90, 220);
         
+        stateName.setBounds(10, 450, 200, 80);
+        state.setBounds(10, 480, 200, 100);
+        
         add(today);
         add(lowTemName);
         add(highTemName);
@@ -220,6 +230,8 @@ public class MainView extends JFrame {
         add(highTem);
         add(lowTem);
         add(humidity);
+        add(stateName);
+        add(state);
 	}
 	
 	public void icon(){
@@ -259,13 +271,19 @@ public class MainView extends JFrame {
         Image humiImage = new ImageIcon("datas/images/main/humidity.png").getImage().getScaledInstance(30, 30, 0);
         JLabel humiIcon = new JLabel(new ImageIcon(humiImage));
         
+        // 상태 아이콘
+        Image stateImge = new ImageIcon("datas/images/main/"+mc.getStateIcon()+".png").getImage().getScaledInstance(50, 50, 0);
+        JLabel stateIcon = new JLabel(new ImageIcon(stateImge));
+        
         highIcon.setBounds( 465 ,250 , 80, 80);
         lowIcon.setBounds( 2, 250 , 80, 80);
         humiIcon.setBounds(545, 458, 80, 80);
+        stateIcon.setBounds(100, 480, 100, 100);
         
         add(highIcon);
         add(lowIcon);
         add(humiIcon);
+        add(stateIcon);
        
 
         
