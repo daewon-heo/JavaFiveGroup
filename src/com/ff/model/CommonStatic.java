@@ -4,6 +4,7 @@ public class CommonStatic {
 	/* IMG */
 	public static String LOADING_IMG_WEATHER = "datas/images/loading.gif";
 	public static String BACKGROUND_SKY_IMG = "datas/images/skyBG.jpg";
+	public static String BACKGROUND_MAIN_IMG = "datas/images/back.jpg";
 	public static String PASTWEATHER_ICON = "datas/images/rainbow.png";
 	public static String MAINVIEW_BTN1_IMG = "datas/images/main/button1.png";
 	public static String MAINVIEW_BTN2_IMG = "datas/images/main/button2.png";

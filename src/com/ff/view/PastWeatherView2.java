@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import com.ff.controller.PastWeatherController2;
 import com.ff.model.CommonStatic;
+import com.sun.xml.internal.ws.api.server.Container;
 
 
 
@@ -49,15 +50,18 @@ public class PastWeatherView2 extends JFrame {
 		super("작년의 오늘 날씨와 현재 날씨");
 		
 		initView(iconAdress);
-		lodingView();
+//		lodingView();
 	}
 	
-	public void lodingView(){
+	public void lodingView(JPanel panel){
 		/*
 		 * 로딩뷰 이미지 넣기
 		 */
-		if(resultPanel != null)
-			swapPanel.remove(resultPanel);
+//		Container str = panel.getcom
+//		if(panel.getComponents()[] getresultPanel != null)
+//			panel.swapPanel.remove(resultPanel);
+//		
+		
 		
 	}
 	
@@ -74,26 +78,39 @@ public class PastWeatherView2 extends JFrame {
 		currWeatherPanel = new JPanel();
 		compWeatherPanel = new JPanel();
 		
+		pastWeatherPanel.setLayout(null);
+		currWeatherPanel.setLayout(null);
+		compWeatherPanel.setLayout(null);
+		
 		/* panel1 */
 		pastWeatherPanel.setBackground(Color.red);
 		gridBag.setConstraints(pastWeatherPanel, constraint);
+		JLabel label1 = new JLabel("패널1");
+		label1.setBounds(50, 50, 100, 100);
+		pastWeatherPanel.add(label1);
 		
 		/* panel2 */
 		currWeatherPanel.setBackground(Color.yellow);
 		constraint.gridwidth = GridBagConstraints.REMAINDER;
 		gridBag.setConstraints(currWeatherPanel, constraint);
+		JLabel label2 = new JLabel("패널2");
+		label2.setBounds(50, 50, 100, 100);
+		currWeatherPanel.add(label2);
 		
 		/* panel3 */
-		compWeatherPanel.setBackground(Color.black);
+		compWeatherPanel.setBackground(Color.PINK);
 		constraint.weighty = 0.07;
 		gridBag.setConstraints(compWeatherPanel, constraint);
+		JLabel label3 = new JLabel("패널3");
+		label3.setBounds(0, 0, 100, 100);
+		compWeatherPanel.add(label3);
 		
 		add(pastWeatherPanel);
 		add(currWeatherPanel);
 		add(compWeatherPanel);
 		
 		setBounds(300, 300, 716, 620);
-		setResizable(false);
+		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
