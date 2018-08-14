@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.DatabaseMetaData;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -242,8 +244,18 @@ public class SpecificDateView extends JFrame {
 		}
 		resultPanel.setVisible(true);
 		
+		String date = textField.getText().trim();
 		
-		String data = "";
+		int year = Integer.parseInt(date.substring(0, 4));
+		int month = Integer.parseInt(date.substring(4, 6)) - 1;
+		int day = Integer.parseInt(date.substring(6, 8));
+		
+		Calendar cal = new GregorianCalendar();
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년M월d일E요일");
+		cal.set(year, month, day);
+		
+		
+		String data = sdf.format(cal.getTime()) + "\n"; 
 		for (int i = 0; i < datas.length; i++) {
 			if(datas[i] == null) {
 				data += params[i][1] + " : x  \n";
