@@ -7,7 +7,8 @@ import java.awt.Font;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -226,6 +227,13 @@ public class TodayStyleView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TodayStyle2Controller nextView = TodayStyle2Controller.getInstance();
 				nextView.viewShow();
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				instance = null;
 			}
 		});
 	

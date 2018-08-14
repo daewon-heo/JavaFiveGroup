@@ -166,15 +166,17 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[0]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[0]);
 			}
 		});
 		
 		btnArr[1].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[1]);
+				TodayStyleView view1 = TodayStyleView.getInstance();
+				if(view1 != null)
+					view1.setBackImg(pathArr[1]);
 			}
 		});
 		
@@ -182,7 +184,8 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[2]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[2]);
 			}
 		});
 		
@@ -190,7 +193,8 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[3]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[3]);
 			}
 		});
 		
@@ -198,7 +202,8 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[4]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[4]);
 			}
 		});
 		
@@ -206,7 +211,8 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[5]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[5]);
 			}
 		});
 		
@@ -214,7 +220,8 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[6]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[6]);
 			}
 		});
 		
@@ -222,7 +229,8 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[7]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[7]);
 			}
 		});
 		
@@ -230,10 +238,9 @@ public void nineImg(String season, JPanel panel){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TodayStyleView view1 = TodayStyleView.getInstance(); 
-				view1.setBackImg(pathArr[8]);
+				if(view1 != null)
+					view1.setBackImg(pathArr[8]);
 			}
 		});
 	}
-	
-	
 }
