@@ -1,5 +1,10 @@
 package com.ff.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.ff.view.SpecificDateView;
 
 import develop.Weather;
@@ -15,10 +20,10 @@ public class SpecificDateController implements Runnable{
 		return instance;
 	}	
 	
-	static int year = 0;
-	public static SpecificDateController getInstance(int searchYear) {
+	static String date = "";
+	public static SpecificDateController getInstance(String searchDate) {
 		
-		year = searchYear;
+		date = searchDate;
 		
 		if(instance == null)
 			instance = new SpecificDateController();
@@ -47,28 +52,26 @@ public class SpecificDateController implements Runnable{
 	
 	@Override
 	public void run() {
+		int year = Integer.parseInt(date.substring(0, 4));
+		int month = Integer.parseInt(date.substring(4, 6));
+		int day = Integer.parseInt(date.substring(6, 8));
 		
-		/*
-		 * 데이터 가져오는 코드 작성
-		 */
+		String[][] params = {
+				{"07","평균온도"},
+				{"08","최고온도"}, 
+				{"10","최저온도"},
+				{"12","평균습도"},
+				{"21","강수량"},
+				{"28","적설량"}
+				};
 		
+		String[] datas = new String[params.length];
 		
+		for (int i = 0; i < params.length; i++) {
+			datas[i] = Weather.GetPastWeather("108", year, params[i][0])[day][month];
+		}
 		
-		
-		
-		String[][] datas1 = Weather.GetPastWeather("108", year, "07"); // 평균온도
-		String[][] datas2 = Weather.GetPastWeather("108", year, "08"); // 최고온도
-		String[][] datas3 = Weather.GetPastWeather("108", year, "10"); // 최저온도
-		String[][] datas4 = Weather.GetPastWeather("108", year, "12"); // 평균습도
-		String[][] datas5 = Weather.GetPastWeather("108", year, "21"); // 강수량
-		String[][] datas6 = Weather.GetPastWeather("108", year, "28"); // 적설량
-
-		/*
-		 * 뷰에서 데이터뷰 실행
-		 */
-		SpecificDateView.getInstance().dataView(datas1, datas2, datas3, datas4, datas5, datas6);
-		
-		
+		SpecificDateView.getInstance().dataView(datas, params);
 	}
 }
 
