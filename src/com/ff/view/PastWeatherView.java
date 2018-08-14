@@ -28,6 +28,9 @@ public class PastWeatherView extends JFrame {
 	JFrame jf = null;
 	JLabel loadingLabel = null;
 	
+	JPanel dataPan = null;
+	JPanel loadingPan = null;
+	
 	private static final long serialVersionUID = -5581181417128426852L;
 	
 	public PastWeatherView(){
@@ -61,6 +64,10 @@ public class PastWeatherView extends JFrame {
 	}
 	
 	public void detailView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm){
+		
+		dataPan = new JPanel();
+		
+		dataPan.setBounds(0, 0, 710, 620);
 		
 		JLabel background = 
 				new JLabel(new ImageIcon(CommonStatic.BACKGROUND_MAIN_IMG));
@@ -127,6 +134,8 @@ public class PastWeatherView extends JFrame {
 		iconLb2.setLocation(435, 85);
 		iconLb2.setSize(200, 200);
 		
+		
+		add(background);
 		background.add(titleLb1);
 		background.add(titleLb2);
 		background.add(compareLb);
@@ -136,7 +145,6 @@ public class PastWeatherView extends JFrame {
 		background.add(presentHumidity);
 		background.add(iconLb1);
 		background.add(iconLb2);
-		add(background);
 		
 	}
 	
