@@ -57,12 +57,12 @@ public class SpecificDateController implements Runnable{
 		int day = Integer.parseInt(date.substring(6, 8));
 		
 		String[][] params = {
-				{"07","평균온도"},
-				{"08","최고온도"}, 
-				{"10","최저온도"},
-				{"12","평균습도"},
-				{"21","강수량"},
-				{"28","적설량"}
+				{"07","     평균온도"},
+				{"08","     최고온도"}, 
+				{"10","     최저온도"},
+				{"12","     평균습도"},
+				{"21","     강 수 량 "},
+				{"28","     적 설 량 "}
 				};
 		
 		String[] datas = new String[params.length];

@@ -2,16 +2,22 @@ package com.ff.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.DatabaseMetaData;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -80,11 +86,22 @@ public class SpecificDateView extends JFrame {
 	/*
 	 * add Component
 	 */
+	
 	public void initComponentAdd(){
 		bgPanel = new JPanel();
 		bgPanel.setLayout(null);
 		bgPanel.setBackground(Color.white);
 		bgPanel.setBounds(0, 0, 450, 600);
+		
+		
+		try {
+			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));	// 아이콘 이미지
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+//		JLabel background = new JLabel(new ImageIcon(CommonStatic.BACKGROUND_MAIN_IMG));	// 배경이미지
+//		background.setBounds(0, 0, 450, 600);
 
 		ImageIcon image1 = new ImageIcon("datas/images/nalssibacloud.png"); // 화면 구름 이미지
 		JLabel label1 = new JLabel(image1);
@@ -102,28 +119,54 @@ public class SpecificDateView extends JFrame {
 		JLabel loading = new JLabel(image4);
 		loading.setBounds(180, 35, 70, 70);
 
-		textField = new JTextField("ex) 20180505");
+		textField = new JTextField();
 		textField.setBounds(125, 320, 150, 30);
 		textField.setFont(font);
 		textField.setForeground(Color.blue);
 		textField.setHorizontalAlignment(textField.CENTER);
-
+		
+		
+		textField.setLayout(new FlowLayout());	// 플레이스 홀더 
+		JLabel placeholder = new JLabel("ex) 19900906");
+		placeholder.setFont(font);
+		placeholder.setForeground(Color.blue);
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				
+				if(arg0.getKeyChar()!=KeyEvent.VK_BACK_SPACE) {
+					placeholder.setVisible(false);
+				} else {
+					if(textField.getText().equals("")) {
+						placeholder.setVisible(true);
+					}
+				}
+			}
+		});
+		textField.add(placeholder);
+		
+		
+		
+		
+		
 		bgPanel.add(label1);
 		bgPanel.add(label2);
 		bgPanel.add(textField);
 		bgPanel.add(searchBtn);
 		bgPanel.add(loading);
-		
+//		bgPanel.add(background);
 		swapPanel.setBounds(125, 350, 180, 200);
 		bgPanel.add(swapPanel);
 		add(bgPanel);
 	}
-	
+
 	public void addListener(){
 		searchBtn.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String result = checkDate(textField.getText());
+				
 				resultTextInput(result);
 			}
 		});
@@ -186,24 +229,24 @@ public class SpecificDateView extends JFrame {
 			int lastday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
 			if (schYear < 1960 || schYear > nowYear) { // 입력된 연도가 1960 보다 작거나 현재 연도보다 크다면
-				String yearfault = "1960년 ~ " + nowYear + "년 조회 가능";
+				String yearfault = "\n1960년 ~ " + nowYear + "년 조회 가능";
 				result = yearfault;
 			} else if (schMonth == 0 || schMonth > 12) { // 입력된 월이 0 또는 13이상
-				String monthfault = "월을 잘 못 입력하셨습니다.";
+				String monthfault = "\n월을 잘 못 입력하셨습니다.";
 				result = monthfault;
 			} else if (schYear == nowYear && schMonth > nowMonth) { // 입력된 연도가 현재 연도와 같으며 입력된 월이 현재 월보다 크면
-				String monthfault = "날씨를 조회할 수 없습니다.";
+				String monthfault = "\n날씨를 조회할 수 없습니다.";
 				result = monthfault;
 			} else if (schDay == 0 || schDay > lastday) { // 입력된 일이 0 이거나 해당 월에
 															// 대한 말일보다 크다면
-				String dayfault = "일을 잘 못 입력하셨습니다.";
+				String dayfault = "\n일을 잘 못 입력하셨습니다.";
 				result = dayfault;
 			} else if (schYear == nowYear && schMonth == nowMonth && schDay >= nowDay) { // 오늘부터~
-				String dayfault = "날씨를 조회할 수 없습니다.";
+				String dayfault = "\n날씨를 조회할 수 없습니다.";
 				result = dayfault;
 			}
 		} else {
-			result = "검색 형식이 잘 못 되었습니다.";
+			result = "\n검색 형식이 잘 못 되었습니다.";
 		}
 		
 		System.out.println("check date result : " + result);
@@ -226,7 +269,7 @@ public class SpecificDateView extends JFrame {
 		swapPanel.add(resultPanel);
 		
 		font = new Font("맑은 고딕", Font.BOLD, 12);
-		area = new JTextArea(14, 12);
+		area = new JTextArea();
 		
 		area.setSize(180, 150);
 		area.setBounds(130, 370, 180, 150);
@@ -251,16 +294,30 @@ public class SpecificDateView extends JFrame {
 		int day = Integer.parseInt(date.substring(6, 8));
 		
 		Calendar cal = new GregorianCalendar();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년M월d일E요일");
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 M월 d일 E요일 날씨");
 		cal.set(year, month, day);
 		
 		
-		String data = sdf.format(cal.getTime()) + "\n"; 
+		String data = "\n" + sdf.format(cal.getTime()) + "\n"; 
 		for (int i = 0; i < datas.length; i++) {
 			if(datas[i] == null) {
-				data += params[i][1] + " : x  \n";
+				if (i == 4) {
+					data += params[i][1] + " : 0.0 mm  \n";
+				} else {
+					data += params[i][1] + " : 0.0 cm  \n";
+				}
+				
 			}else{
-				data += params[i][1] + " : " + datas[i] + "\n";
+				if(i <= 2) {
+					data += params[i][1] + " : " + datas[i] + " ℃  \n";
+				} else if (i == 3) {
+					data += params[i][1] + " : " + datas[i] + " %  \n";
+				} else if (i == 4) {
+					data += params[i][1] + " : " + datas[i] + " mm  \n";
+				} else {
+					data += params[i][1] + " : " + datas[i] + " cm  \n";
+				}
+				
 			}
 		}
 		textInput(data);
