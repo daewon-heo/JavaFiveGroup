@@ -2,6 +2,7 @@ package com.ff.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,6 +30,7 @@ import com.ff.controller.TodayStyleController;
 import com.ff.model.CommonStatic;
 
 import develop.Weather;
+import sun.applet.Main;
 
 public class MainView extends JFrame {
 	
@@ -43,7 +45,7 @@ public class MainView extends JFrame {
 	
 	JFrame jf = new JFrame();
 	JLabel loadingLabel = null;
-	MainController mc = new MainController();
+	MainController mc = MainController.getInstance();
 	
 	PastWeatherController view1Controller = null;
 	TodayStyleController view2Controller = null;
@@ -51,14 +53,29 @@ public class MainView extends JFrame {
 	
 	Image myImg = new ImageIcon("datas/images/main/button1.png").getImage();
 	
+	JPanel dataPanel = new JPanel();
+	public static JPanel loadingPanel = new JPanel();
 	
-	public MainView(){
+	public static MainView instance = null;
+	public static MainView getInstance(){
+		if(instance == null)
+			instance = new MainView();
+		return instance;
+	}
+	
+	private MainView(){
 		super("날씨 봐라");
-		//loadingView();
-		
-		init();
 
-		String[][] str = getPastWeather();	// 과거 날씨 데이터 가져오기
+		backGrounImg1();
+		init();
+		
+		loadingView();
+
+		setBounds(500, 250, 700, 600);
+    	setVisible(true);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+//		String[][] str = getPastWeather();	// 과거 날씨 데이터 가져오기
 	}
 	
 	
@@ -68,34 +85,30 @@ public class MainView extends JFrame {
 	}
 	
 	public void loadingView(){
-		
-		backGrounImg1();
 		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
 		loadingLabel = new JLabel(imageIcon);
-    	add(loadingLabel);
+		
+		loadingPanel.add(loadingLabel);
+		loadingPanel.setLayout(new BorderLayout());
+		loadingPanel.add(loadingLabel, "Center");
+		loadingPanel.setBounds(0, 0, 700, 600);
+		loadingPanel.setOpaque(false);
+		add(loadingPanel);
     	
     	try {
 			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
 		} catch (IOException e1) {
 			System.out.println("이미지파일 오류 발생");
 		}
-    	setBounds(500, 250, 700, 600);
-    	setVisible(true);
 	}
 	
 	
 
 	public void init() {
-		//backGrounImg1();
-		loadingView();
-		
 		setLayout(null);
 		
 		// 데이터 불러오기
-    	mc.getDatas();
-
-    	// 배경 생성
-		backGrounImg1();
+//    	mc.getDatas();
 
 		// 프로그램 아이콘
 		try {
@@ -105,19 +118,15 @@ public class MainView extends JFrame {
 		}
 
         // 메뉴 버튼
-        //initView();
         menuButton();
         
         // 날씨 정보 요소
-        temComponent();
+//        temComponent();
 
         // 아이콘 설정
-        icon();
+//        icon();
 
-        JLabel end = new JLabel();
-        add(end);
-            
-		//setBounds(500, 250, 700, 600);
+		setBounds(500, 250, 700, 600);
 		setResizable(false);	
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,7 +139,6 @@ public class MainView extends JFrame {
         btn1.setFocusPainted(false); 
         btn1.setContentAreaFilled(false);
         btn1.setBorderPainted(false);
-
         
         myImg = new ImageIcon("datas/images/main/button2.png").getImage();
         btn2 = new JButton(new ImageIcon(myImg));
@@ -138,13 +146,11 @@ public class MainView extends JFrame {
         btn2.setContentAreaFilled(false);
         btn2.setBorderPainted(false);
 
-     
         myImg = new ImageIcon("datas/images/main/button3.png").getImage();
         btn3 = new JButton(new ImageIcon(myImg));
         btn3.setFocusPainted(false); 
         btn3.setContentAreaFilled(false);
         btn3.setBorderPainted(false);
-        
         
         // 버튼 위치 조정
         btn1.setBounds(70, 0, 170, 50);
@@ -155,13 +161,11 @@ public class MainView extends JFrame {
         add(btn2);
         add(btn3);
         
-
-        
         // 버튼 이벤트
         addListener();
 	}
 	
-	public void temComponent(){
+	public void temComponent(MainController mc){
 		// 날짜
         JLabel today = new JLabel();
         JLabel day = new JLabel();
@@ -234,7 +238,7 @@ public class MainView extends JFrame {
         add(state);
 	}
 	
-	public void icon(){
+	public void icon(MainController mc){
 	
         // 메인 아이콘
         Image mainImage = new ImageIcon("datas/images/"+ mc.getIconName()+".png").getImage().getScaledInstance(300, 300, 0);
@@ -294,21 +298,6 @@ public class MainView extends JFrame {
         
 	}
 	
-	public void initView() {
-		
-//		jf.setBounds(200, 200, 300, 300);
-//		jf.setLayout(new GridLayout());
-
-		btn1 = new JButton("화면1");
-		btn2 = new JButton("화면2");
-		btn3 = new JButton("화면3");
-		
-//		jf.setResizable(false);
-//		jf.setVisible(true);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-	}
-	
 	public void addListener() {
 		
 		btn1.addActionListener(new ActionListener() {
@@ -345,9 +334,9 @@ public class MainView extends JFrame {
 
 		BufferedImage backgroundImage;
 		try {
-			if (mc.getIconName().equals("snow")) {
+			if (MainController.getInstance().getIconName().equals("snow")) {
 				backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/snow.jpg"));
-			} else if (mc.getIconName().equals("rain")) {
+			} else if (MainController.getInstance().getIconName().equals("rain")) {
 				backgroundImage = javax.imageio.ImageIO.read(new File("datas/images/main/rain.jpg"));
 			} else {
 				// backgroundImage = javax.imageio.ImageIO.read(new
@@ -396,50 +385,17 @@ public class MainView extends JFrame {
 		}
     	
     	add(ldpan);
-
-    	setVisible(true);
-    	
-    	setBounds(500, 250, 700, 600);
-    	
-    	
+//    	setVisible(true);
+//    	setBounds(500, 250, 700, 600);
     	
         // 상대 습도
         JLabel humidityName = new JLabel("습도");
         humidityName.setFont(new Font("맑은 고딕", Font.BOLD, 25));
         JLabel humidity = new JLabel();
-        humidity.setText(mc.getHumidity()+"%");
+        humidity.setText(MainController.getInstance().getHumidity()+"%");
         humidity.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         
         humidityName.setBounds(600,400,100,100);
         humidity.setBounds(600,500,100,100);
-        
-        
-        
-        // 프레임에 추가
-//      mainpan.add(btn1);
-//      mainpan.add(btn2);
-//      mainpan.add(btn3);
-//      mainpan.add(menu1Icon);
-//      mainpan.add(menu2Icon);
-//      mainpan.add(menu3Icon);
-//      
-//      mainpan.add(mainIcon);
-//      mainpan.add(today);
-//      mainpan.add(lowTemName);
-//      mainpan.add(highTemName);
-//      
-//
-//      
-//      mainpan.add(day);
-//      mainpan.add(highIcon);
-//      mainpan.add(lowIcon);
-//      mainpan.add(nowTem);
-//      mainpan.add(highTem);
-//      mainpan.add(lowTem);
-//      
-//
-//      mainpan.add(end);
-//      add(mainpan);
-    	
 	}
 }

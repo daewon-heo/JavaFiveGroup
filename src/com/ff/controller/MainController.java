@@ -8,8 +8,9 @@ import java.util.Map;
 import com.ff.view.MainView;
 
 import develop.*;
+import sun.applet.Main;
 
-public class MainController {
+public class MainController implements Runnable {
 	MainView mainView = null;
 
 	private Calendar cal;    
@@ -24,18 +25,14 @@ public class MainController {
 	private String nowState;
 	private String stateIcon;
 	
-
-	/*public MainController(){
-
-		cal = new GregorianCalendar();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY년 MM월 dd일"); // 현재시간
-		SimpleDateFormat wday = new SimpleDateFormat("E요일");
-		today = sdf.format(cal.getTime());
-		day = wday.format(cal.getTime());
-
-	}*/
+	public static MainController instance = null;
+	public static MainController getInstance(){
+		if(instance == null)
+			instance = new MainController();
+		return instance;
+	}
 	
-	public MainController(){
+	private MainController(){
 
 	}
 	
@@ -206,7 +203,26 @@ public class MainController {
 
 
 	public void viewShow() {
-		mainView = new MainView();
+		mainView = MainView.getInstance();
+		
+	}
+
+	@Override
+	public void run() {
+		System.out.println("과거정보 가져오기 시작");
+		String[][] test = Weather.GetPastWeather("108", 2000, "07");
+		System.out.println("test : " + test);
+		this.getDatas();
+		
+		MainView.getInstance().remove(MainView.getInstance().loadingPanel);
+		
+		MainView.getInstance().temComponent(this);
+		MainView.getInstance().icon(this);
+
+		MainView.getInstance().repaint();
+		MainView.getInstance().revalidate();;
+		
+		System.out.println("과거정보 가져오기 끝");
 		
 	}
 }
