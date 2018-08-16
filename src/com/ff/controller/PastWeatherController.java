@@ -1,6 +1,7 @@
 package com.ff.controller;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -15,6 +16,10 @@ public class PastWeatherController {
 	private static double temperature;
 	private static double ta;
 	private PastWeatherView view1View = null;
+	private Calendar cal = new GregorianCalendar();
+	private int year;
+	private int month;
+	private int day;
 	
 	public PastWeatherController(){
 		
@@ -31,15 +36,12 @@ public class PastWeatherController {
 	public void getWeatherData(){
 		
 		// ================== 과거 날씨로 아이콘 가져오기
-		Calendar cal = new GregorianCalendar();
 		
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
+		year = cal.get(Calendar.YEAR);
+		month = cal.get(Calendar.MONTH) + 1;
+		day = cal.get(Calendar.DAY_OF_MONTH);
 		
 		String[][] datas1 = Weather.GetPastWeather("108", year-1, "90");
-		
-		System.out.printf("%d년 %d월 %d일\n", year-1, month, day);
 		
 		int num = pastWeather(datas1[day][month]);
 		
@@ -70,16 +72,28 @@ public class PastWeatherController {
 		try{
 		ta = Double.parseDouble((String) temp.get("기온"));
 		} catch(NumberFormatException e){
-			System.out.println("트래픽이 1000건을 초과해서 기온과 습도를 불러올수 없습니다.");
+			System.out.println("트래픽이 10만건을 초과해서 기온과 습도를 불러올수 없습니다.");
 		}
 		System.out.println("현재 온도 : " + ta + " ℃");
 		
 		// ================== 현재 습도
 		String hm = temp.get("습도") +" %";
 		System.out.println("현재 습도 : " + hm);
+		
+		
 		// 현재날씨 아이콘 과거날씨 아이콘 매개변수로 넘겨주기
 		
-		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 M월 d일 E요일");
+		
+		String presentDate = sdf.format(cal.getTime());
+		
+		year = cal.get(Calendar.YEAR) -1;
+		
+		cal.set(year, month -1, day);
+	
+		String pastDate = sdf.format(cal.getTime());
+		
+		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm, presentDate, pastDate);
 		
 		
 	}
