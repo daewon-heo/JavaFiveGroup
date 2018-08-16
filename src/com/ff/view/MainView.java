@@ -198,7 +198,7 @@ public class MainView extends JFrame {
         humidity.setFont(new Font("맑은 고딕", Font.BOLD, 30));
         
         // 현재 상태
-        JLabel stateName = new JLabel("오늘은");
+        JLabel stateName = new JLabel("지금은");
         stateName.setFont(new Font("맑은 고딕", Font.BOLD, 25));
         JLabel state = new JLabel();
         state.setText(mc.getNowState());
@@ -278,7 +278,12 @@ public class MainView extends JFrame {
         highIcon.setBounds( 465 ,250 , 80, 80);
         lowIcon.setBounds( 2, 250 , 80, 80);
         humiIcon.setBounds(545, 458, 80, 80);
-        stateIcon.setBounds(100, 480, 100, 100);
+        if(mc.getStateIcon().equals("smile" ) || mc.getStateIcon().equals("wind")){
+        	stateIcon.setBounds(130, 480, 100, 100);
+        }else{
+        	stateIcon.setBounds(100, 480, 100, 100);	
+        }
+        
         
         add(highIcon);
         add(lowIcon);
