@@ -50,12 +50,15 @@ public class PastWeatherView extends JFrame {
 	public void loadingView(){
 		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
 		JLabel loadingLabel = new JLabel(imageIcon);
+		JLabel background = 
+				new JLabel(new ImageIcon("datas/images/day.jpg"));
+		background.setBounds(0, 0, 710, 620);
 		
-		loadingPanel.add(loadingLabel);
-		loadingPanel.setLayout(new BorderLayout());
-		loadingPanel.add(loadingLabel, "Center");
-		loadingPanel.setBounds(0, 0, 700, 600);
-		loadingPanel.setOpaque(false);
+		loadingPanel.add(background);
+		background.setLayout(new BorderLayout());
+		background.add(loadingLabel);
+		loadingPanel.setBounds(0, -10, 710, 620);
+		
 		add(loadingPanel);
     	
     	try {
@@ -63,7 +66,7 @@ public class PastWeatherView extends JFrame {
 		} catch (IOException e1) {
 			System.out.println("이미지파일 오류 발생");
 		}
-//    	initView();
+
 	}
 	
 	public void initView() {
@@ -171,7 +174,6 @@ public class PastWeatherView extends JFrame {
 		iconLb2.setLocation(435, 105);
 		iconLb2.setSize(200, 200);
 		
-		
 		add(background);
 		background.add(titleLb1);
 		background.add(titleLb2);
@@ -184,7 +186,6 @@ public class PastWeatherView extends JFrame {
 		background.add(presentHumidity);
 		background.add(iconLb1);
 		background.add(iconLb2);
-		
 	}
 	
 

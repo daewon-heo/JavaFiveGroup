@@ -17,9 +17,8 @@ public class PastWeatherController implements Runnable{
 	private static double temperature;
 	private static double ta;
 	private PastWeatherView view1View = null;
-	
-	
 	public static PastWeatherController instance = null;
+	
 	public static PastWeatherController getInstance(){
 		if(instance == null)
 			instance = new PastWeatherController();
