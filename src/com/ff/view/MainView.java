@@ -212,6 +212,11 @@ public class MainView extends JFrame {
         state.setText(mc.getNowState());
         state.setFont(new Font("맑은 고딕", Font.BOLD, 35));
         
+        // 데이터 사용 공용데이터포털을 이용했습니다.
+        JLabel data = new JLabel("Data는 공용데이터포털을 이용하였습니다.");
+        data.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+        
+        
         humidityName.setBounds(600,450,100,100);
         humidity.setBounds(590,490,150,100);
         
@@ -228,6 +233,8 @@ public class MainView extends JFrame {
         stateName.setBounds(10, 450, 200, 80);
         state.setBounds(10, 480, 200, 100);
         
+        data.setBounds(230, 548,250,30);
+        
         add(today);
         add(lowTemName);
         add(highTemName);
@@ -240,6 +247,8 @@ public class MainView extends JFrame {
         add(humidity);
         add(stateName);
         add(state);
+        
+        add(data);
 	}
 	
 	public void icon(MainController mc){

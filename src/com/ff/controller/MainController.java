@@ -58,6 +58,11 @@ public class MainController implements Runnable {
 		humidity = awsMap.get("습도") + "%";
 		System.out.println("습도"+humidity);
 		
+		
+//		nowTem = "20";
+//		nowTem = "10";
+//		nowTem = "-1";
+		
 		double douNowTep = Double.parseDouble(nowTem);
 		int intNowTep = (int)douNowTep;
 		if(intNowTep >= 27){
