@@ -207,7 +207,7 @@ public class MainView extends JFrame {
         state.setFont(new Font("맑은 고딕", Font.BOLD, 35));
         
         // 데이터 사용 공용데이터포털을 이용했습니다.
-        JLabel data = new JLabel("Data는 공용데이터포털을 이용하였습니다.");
+        JLabel data = new JLabel("");
         data.setFont(new Font("맑은 고딕", Font.BOLD, 12));
         
         
