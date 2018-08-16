@@ -43,7 +43,7 @@ public class MainView extends JFrame {
 	TodayStyleController view2Controller = null;
 	SpecificDateController view3Controller = null;
 	
-	Image myImg = new ImageIcon("datas/images/main/button1.png").getImage();
+
 	
 	JPanel dataPanel = new JPanel();
 	public static JPanel loadingPanel = new JPanel();
@@ -129,6 +129,8 @@ public class MainView extends JFrame {
 	}
 	
 	public void menuButton(){
+		
+		Image myImg = new ImageIcon("datas/images/main/button1.png").getImage();
 		
 		// 메뉴 버튼 설정
         btn1 = new JButton(new ImageIcon(myImg));
