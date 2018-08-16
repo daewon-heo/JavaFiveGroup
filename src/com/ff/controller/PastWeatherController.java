@@ -12,8 +12,8 @@ import com.ff.model.Weather;
 
 public class PastWeatherController implements Runnable{
 	
-	private static double temperature;
-	private static double ta;
+	private static double pastTemper;
+	private static double presentTemper;
 	private PastWeatherView view1View = null;
 	public static PastWeatherController instance = null;
 	
@@ -46,14 +46,11 @@ public class PastWeatherController implements Runnable{
 	
 	public void getWeatherData(){
 		Calendar cal = new GregorianCalendar();
-		// ================== 과거 날씨로 아이콘 가져오기
-		int year;
-		int month;
-		int day;
 		
-		year = cal.get(Calendar.YEAR);
-		month = cal.get(Calendar.MONTH) + 1;
-		day = cal.get(Calendar.DAY_OF_MONTH);
+		// ================== 과거 날씨로 아이콘 가져오기
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int day = cal.get(Calendar.DAY_OF_MONTH);
 		
 		String[][] datas1 = Weather.GetPastWeather("108", year-1, "90");
 		
@@ -63,8 +60,8 @@ public class PastWeatherController implements Runnable{
 		
 		// ================== 작년 최고 온도
 		String[][] datas2 = Weather.GetPastWeather("108", year-1, "08");
-		temperature = Double.parseDouble(datas2[day][month]);
-		System.out.println("작년 최고온도  : "+temperature + " ℃");
+		pastTemper = Double.parseDouble(datas2[day][month]);
+		System.out.println("작년 최고온도  : "+pastTemper + " ℃");
 		
 		// ================== 작년 습도
 		String[][] datas3 = Weather.GetPastWeather("108", year-1, "12");
@@ -84,11 +81,11 @@ public class PastWeatherController implements Runnable{
 		
 		// ================== 현재 온도
 		try{
-		ta = Double.parseDouble((String) temp.get("기온"));
+		presentTemper = Double.parseDouble((String) temp.get("기온"));
 		} catch(NumberFormatException e){
 			System.out.println("트래픽이 10만건을 초과해서 기온과 습도를 불러올수 없습니다.");
 		}
-		System.out.println("현재 온도 : " + ta + " ℃");
+		System.out.println("현재 온도 : " + presentTemper + " ℃");
 		
 		// ================== 현재 습도
 		String hm = temp.get("습도") +" %";
@@ -107,7 +104,7 @@ public class PastWeatherController implements Runnable{
 	
 		String pastDate = sdf.format(cal.getTime());
 		
-		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm, presentDate, pastDate);
+		view1View.detailView(pastIcon, presentIcon, pastTemper, humidity, presentTemper, hm, presentDate, pastDate);
 		
 	}
 	
@@ -119,10 +116,10 @@ public class PastWeatherController implements Runnable{
 		String format = "#.#";
 		DecimalFormat df = new DecimalFormat(format); 
 		
-		if( temperature > ta){
-				result = "오늘이 작년보다 "+ df.format((ta-temperature)*-1) +" ℃ 더 낮습니다.";
-		 } else if ( temperature < ta ){
-			 	result = "오늘이 작년보다 "+ df.format((ta-temperature)) +" ℃ 더 높습니다.";
+		if( pastTemper > presentTemper){
+				result = "오늘이 작년보다 "+ df.format((presentTemper-pastTemper)*-1) +" ℃ 더 낮습니다.";
+		 } else if ( pastTemper < presentTemper ){
+			 	result = "오늘이 작년보다 "+ df.format((presentTemper-pastTemper)) +" ℃ 더 높습니다.";
 		 } else {
 		 		result = "오늘은 작년과 온도가 같습니다.";
 		 }
