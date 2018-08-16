@@ -35,6 +35,7 @@ public class PastWeatherView extends JFrame {
 	}
 
 	private PastWeatherView() {
+		
 		super("작년의 오늘은 어땠을까?");
 
 		initView();
@@ -43,8 +44,8 @@ public class PastWeatherView extends JFrame {
 	}
 
 	public void loadingView() {
-		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
-		JLabel loadingLabel = new JLabel(imageIcon);
+		
+		JLabel loadingLabel = new JLabel(new ImageIcon(CommonStatic.LOADING_IMG_WEATHER));
 		JLabel background = new JLabel(new ImageIcon("datas/images/day.jpg"));
 		background.setBounds(0, 0, 710, 620);
 
@@ -89,8 +90,8 @@ public class PastWeatherView extends JFrame {
 		});
 	}
 
-	public void detailView(String pastIcon, String presentIcon, double temperature, String humidity, double ta,
-			String hm, String presentDate, String pastDate) {
+	public void detailView(String pastIcon, String presentIcon, double temperature, double ta, double pastHm,
+			double presentHm, String presentDate, String pastDate) {
 
 		JLabel background = new JLabel(new ImageIcon(CommonStatic.BACKGROUND_MAIN_IMG));
 
@@ -111,10 +112,10 @@ public class PastWeatherView extends JFrame {
 		JLabel iconLb2 = new JLabel(new ImageIcon(presentWeaterIcon));
 
 		JLabel pastTemperature = new JLabel(temperature + " ℃");
-		JLabel pastHumidity = new JLabel(humidity);
+		JLabel pastHumidity = new JLabel(pastHm + " %");
 
 		JLabel presentTemperature = new JLabel(ta + " ℃");
-		JLabel presentHumidity = new JLabel(hm);
+		JLabel presentHumidity = new JLabel(presentHm + " %");
 
 		titleLb1.setFont(new Font("맑은 고딕", Font.BOLD, 2));
 		titleLb1.setFont(titleLb1.getFont().deriveFont(25.0f));
