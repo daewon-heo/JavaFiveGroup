@@ -2,6 +2,7 @@ package com.ff.view;
 
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -13,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -61,78 +62,53 @@ public class TodayStyleView extends JFrame {
 		super("이런 스타일 어때요?");
 		initView(fileName);
 		
+		loadingView();
+		
 		initComponent();
-		setWeatherInfo();
+
 		addListener();
 		setBackImg(fileName);
 		
+//		setWeatherInfo();
+	}
+	
+	JLabel loadingLabel = null;
+	public JPanel loadingPanel = null;
+	
+	public void loadingView(){
+		System.out.println("로딩중 .....");
+		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
+		loadingPanel = new JPanel();
+		loadingLabel = new JLabel(imageIcon);
 		
+		
+		loadingPanel.add(loadingLabel);
+		loadingPanel.setLayout(new BorderLayout());
+		loadingPanel.add(loadingLabel, "Center");
+		loadingPanel.setBounds(25, 550, 150, 150);
+		loadingPanel.setOpaque(false);
+		add(loadingPanel);
+    	
+    	try {
+			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
+		} catch (IOException e1) {
+			System.out.println("이미지파일 오류 발생");
+		}
 	}
 	
 	//public void dataView(String[][] datas){}
 	
 	public void setBackImg(String fileName) {
-		
 		bgPanel.remove(bgLabel); // 스타일 더보기 창에서 버튼 클릭시 원래 라벨 지우는것
 		bgLabel = new JLabel(new ImageIcon(fileName));
 		bgLabel.setLocation(0, 0);
 		bgLabel.setSize(450, 780);
 		bgPanel.add(bgLabel);
 		refresh();
-		
-//		bgPanel.setLayout(null);
-//		
-//		JLabel temper;	
-//		JLabel region;
-//		JLabel today;
-//		JLabel high;
-//		JLabel low;	
-//		
-//		
-//        temper = new JLabel();
-//        temper.setText(tsc.getNowTem()+"℃");
-//        temper.setForeground(Color.WHITE);
-//        temper.setFont(new Font("Fixedsys",Font.BOLD, 20));
-//        temper.setBounds(30, 575, 130, 25);	
-//		this.getContentPane().add(temper);
-//      
-//		
-//		region = new JLabel();
-//		region.setText(tsc.getRegion());
-//		region.setForeground(Color.WHITE);
-//		region.setFont(new Font("Fixedsys",Font.BOLD, 20));
-//		region.setBounds(30, 605, 130, 25);	
-//		this.getContentPane().add(region);
-//		
-//		today = new JLabel();
-//		today.setText(tsc.getToday());
-//		today.setForeground(Color.WHITE);	
-//		today.setFont(new Font("Fixedsys",Font.BOLD, 20));
-//        today.setBounds(30, 640, 180, 25);
-//		this.getContentPane().add(today);
-//
-//		high = new JLabel();
-//		high.setText("Highs: "+tsc.getHigh()+"℃");
-//		high.setForeground(Color.WHITE);	
-//		high.setFont(new Font("Fixedsys",Font.BOLD, 20));
-//		high.setBounds(30, 675, 130, 25);
-//		this.getContentPane().add(high);
-//
-//		low = new JLabel();
-//		low.setText("Lows: "+tsc.getLow()+"℃");
-//		low.setForeground(Color.WHITE);	
-//		low.setFont(new Font("Fixedsys",Font.BOLD, 20));
-//        low.setBounds(30, 705, 130, 25);	
-//		this.getContentPane().add(low);	
-//		
-//	
-//		
-//		add(bgPanel);
 	}
 
-	public void setWeatherInfo(){
-		
-		
+	public void setWeatherInfo(TodayStyleController tsc){
+		System.out.println("setWeatherInfo start");
 		bgPanel.setLayout(null);
 		tsc.weather();
 		
@@ -142,14 +118,12 @@ public class TodayStyleView extends JFrame {
 		JLabel high;
 		JLabel low;	
 		
-		
         temper = new JLabel();
         temper.setText(tsc.getNowTem()+"℃");
         temper.setForeground(Color.WHITE);
         temper.setFont(new Font("Fixedsys",Font.BOLD, 20));
-        temper.setBounds(30, 575, 130, 25);	
+        temper.setBounds(30, 575, 130, 25);
 		this.getContentPane().add(temper);
-      
 		
 		region = new JLabel();
 		region.setText(tsc.getRegion());
@@ -179,10 +153,9 @@ public class TodayStyleView extends JFrame {
         low.setBounds(30, 705, 130, 25);	
 		this.getContentPane().add(low);	
 		
-	
-		
 		add(bgPanel);
 		
+		System.out.println("setWeatherInfo end");
 	}
 	
 	public void refresh() {

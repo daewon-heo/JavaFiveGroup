@@ -133,13 +133,21 @@ public class SpecificDateView extends JFrame {
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				
 				if(arg0.getKeyChar()!=KeyEvent.VK_BACK_SPACE) {
 					placeholder.setVisible(false);
 				} else {
 					if(textField.getText().equals("")) {
 						placeholder.setVisible(true);
 					}
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyChar() == '\n'){
+					System.out.println("엔터");
+					String result = checkDate(textField.getText());
+					resultTextInput(result);
 				}
 			}
 		});

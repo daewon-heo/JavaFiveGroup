@@ -7,10 +7,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import com.ff.view.TodayStyleView;
+import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
 
 import develop.Weather;
 
-public class TodayStyleController {
+public class TodayStyleController implements Runnable {
 	
 	TodayStyleView TodayStyleView = null;
 	
@@ -76,7 +77,7 @@ public class TodayStyleController {
 	
 	public void viewShow() {
 		TodayStyleView = TodayStyleView.getInstance(seasonStyle());
-		
+//		new Thread(this).start();
 	}
 
 	
@@ -118,6 +119,7 @@ public class TodayStyleController {
 	}
 	
 	public void weather(){
+		System.out.println("weather 시작");
 		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
 		Calendar cal = new GregorianCalendar();
 		
@@ -127,6 +129,16 @@ public class TodayStyleController {
 		today = sdf.format(cal.getTime());
 		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
+		System.out.println("weather 끝");
 	
  }
+
+	@Override
+	public void run() {
+		System.out.println("thread run start");
+		TodayStyleView.getInstance().setWeatherInfo(getInstance());
+		TodayStyleView.getInstance().remove(TodayStyleView.getInstance().loadingPanel);
+		TodayStyleView.getInstance().refresh();
+		System.out.println("thread run end");
+	}
 }
