@@ -20,6 +20,7 @@ public class MainController implements Runnable {
 	private String low; 		 // 최저 기온
 	private String humidity;	 // 상대 습도
 	private String today;	 // 오늘 날짜
+	
 	private String day;
 	private String iconName = "sun";
 	private String nowState;
@@ -46,7 +47,7 @@ public class MainController implements Runnable {
 		
 		Map<String, String> awsMap = Weather.GetCurrentWeather("108");
 
-		nowTem = awsMap.get("기온"); // 현재 기온
+		nowTem = awsMap.get("기온"); // 현재 기온  "-1"; //
 		rain = Boolean.parseBoolean(awsMap.get("강수감지"));
 		high = Weather.GetPastWeather("108", cal.getWeekYear(), "08")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
 		low = Weather.GetPastWeather("108", cal.getWeekYear(), "10")[cal.get(Calendar.DATE)][cal.get(Calendar.MONTH)+1];
@@ -122,11 +123,9 @@ public class MainController implements Runnable {
 	}
 
 
-
 	public boolean isRain() {
 		return rain;
 	}
-
 
 
 	public String getHigh() {
@@ -134,17 +133,14 @@ public class MainController implements Runnable {
 	}
 
 
-
 	public String getLow() {
 		return low;
 	}
 
 
-
 	public String getHumidity() {
 		return humidity;
 	}
-
 
 
 	public String getToday() {
@@ -216,11 +212,15 @@ public class MainController implements Runnable {
 		
 		MainView.getInstance().remove(MainView.getInstance().loadingPanel);
 		
+		MainView.getInstance().backGrounImg1();
+		
 		MainView.getInstance().temComponent(this);
 		MainView.getInstance().icon(this);
-
+		MainView.getInstance().init();
+		
 		MainView.getInstance().repaint();
 		MainView.getInstance().revalidate();;
+		
 		
 		System.out.println("과거정보 가져오기 끝");
 		
