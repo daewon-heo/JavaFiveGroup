@@ -127,9 +127,9 @@ public class SpecificDateView extends JFrame {
 		
 		
 		textField.setLayout(new FlowLayout());	// 플레이스 홀더 
-		JLabel placeholder = new JLabel("ex) 19900906");
+		JLabel placeholder = new JLabel("ex) 19900906 ");
 		placeholder.setFont(font);
-		placeholder.setForeground(Color.blue);
+		placeholder.setForeground(Color.gray);
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -143,12 +143,8 @@ public class SpecificDateView extends JFrame {
 				}
 			}
 		});
+		
 		textField.add(placeholder);
-		
-		
-		
-		
-		
 		bgPanel.add(label1);
 		bgPanel.add(label2);
 		bgPanel.add(textField);
