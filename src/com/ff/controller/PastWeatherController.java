@@ -46,10 +46,6 @@ public class PastWeatherController implements Runnable{
 		
 	}
 	
-	public void dataView(String pastIcon, String presentIcon, double temperature,  String humidity, double ta, String hm, String presentDate, String pastDate  ){
-		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm, presentDate, pastDate);
-	}
-	
 	public void getWeatherData(){
 		Calendar cal = new GregorianCalendar();
 		// ================== 과거 날씨로 아이콘 가져오기
