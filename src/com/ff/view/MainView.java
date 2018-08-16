@@ -73,13 +73,14 @@ public class MainView extends JFrame {
 		
 		loadingView();
 
+		
 		setBounds(500, 250, 700, 600);
     	setVisible(true);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //		String[][] str = getPastWeather();	// 과거 날씨 데이터 가져오기
+    	
 	}
-	
 	
 	public String[][] getPastWeather(){
 		String[][] pastWeather = Weather.GetPastWeather("108", 2018, "08");
@@ -108,6 +109,7 @@ public class MainView extends JFrame {
 
 	public void init() {
 		setLayout(null);
+		
 		
 		// 데이터 불러오기
 //    	mc.getDatas();
@@ -377,7 +379,6 @@ public class MainView extends JFrame {
 	}
 
 		
-	
 	public void annotation(){
 		// 로딩화면
 		Image backg = new ImageIcon("datas/images/back.jpg").getImage().getScaledInstance(700, 600, 50);
