@@ -69,6 +69,8 @@ public class MainView extends JFrame {
 		backGrounImg1();
 		init();
 		
+		menuIcon();
+		
 		loadingView();
 
 		setBounds(500, 250, 700, 600);
@@ -296,6 +298,23 @@ public class MainView extends JFrame {
        
 
         
+	}
+	
+	public void menuIcon(){
+		// 메뉴버튼 아이콘
+        Image menu1Image = new ImageIcon("datas/images/main/analysis.png").getImage().getScaledInstance(40, 40, 0);
+        JLabel menu1Icon = new JLabel(new ImageIcon(menu1Image));
+        Image menu2Image = new ImageIcon("datas/images/main/tie.png").getImage().getScaledInstance(40, 40, 0);
+        JLabel menu2Icon = new JLabel(new ImageIcon(menu2Image));
+        Image menu3Image = new ImageIcon("datas/images/main/appointment.png").getImage().getScaledInstance(40, 40, 0);
+        JLabel menu3Icon = new JLabel(new ImageIcon(menu3Image));
+        menu1Icon.setBounds(30, 5, 40, 40);
+        menu2Icon.setBounds(255, 5, 40, 40);
+        menu3Icon.setBounds(470, 5, 40, 40);
+        
+        add(menu1Icon);
+        add(menu2Icon);
+        add(menu3Icon);
 	}
 	
 	public void addListener() {
