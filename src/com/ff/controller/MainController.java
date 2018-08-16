@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+import com.ff.model.Weather;
 import com.ff.view.MainView;
 
-import develop.*;
 import sun.applet.Main;
 
 public class MainController implements Runnable {

@@ -1,13 +1,7 @@
 package com.ff.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.ff.model.Weather;
 import com.ff.view.SpecificDateView;
-
-import develop.Weather;
 
 public class SpecificDateController implements Runnable{
 	SpecificDateView specificdateView = null;

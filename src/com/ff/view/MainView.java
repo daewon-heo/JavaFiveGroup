@@ -1,17 +1,11 @@
 package com.ff.view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,9 +22,7 @@ import com.ff.controller.PastWeatherController;
 import com.ff.controller.SpecificDateController;
 import com.ff.controller.TodayStyleController;
 import com.ff.model.CommonStatic;
-
-import develop.Weather;
-import sun.applet.Main;
+import com.ff.model.Weather;
 
 public class MainView extends JFrame {
 	
@@ -50,7 +42,8 @@ public class MainView extends JFrame {
 	PastWeatherController view1Controller = null;
 	TodayStyleController view2Controller = null;
 	SpecificDateController view3Controller = null;
-
+	
+	Image myImg = new ImageIcon("datas/images/main/button1.png").getImage();
 	
 	JPanel dataPanel = new JPanel();
 	public static JPanel loadingPanel = new JPanel();
@@ -137,8 +130,6 @@ public class MainView extends JFrame {
 	
 	public void menuButton(){
 		
-		
-		Image myImg = new ImageIcon("datas/images/main/button1.png").getImage();
 		// 메뉴 버튼 설정
         btn1 = new JButton(new ImageIcon(myImg));
         btn1.setFocusPainted(false); 
@@ -345,6 +336,7 @@ public class MainView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				view2Controller =  TodayStyleController.getInstance();
 				view2Controller.viewShow();
+				new Thread(view2Controller).start();
 			}
 		});
 		

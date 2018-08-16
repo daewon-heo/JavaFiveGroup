@@ -1,4 +1,4 @@
-package develop;
+package com.ff.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;

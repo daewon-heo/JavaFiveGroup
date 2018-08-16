@@ -7,10 +7,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ff.view.MainView;
 import com.ff.view.PastWeatherView;
-
-import develop.Weather;
+import com.ff.model.Weather;
 
 public class PastWeatherController implements Runnable{
 	

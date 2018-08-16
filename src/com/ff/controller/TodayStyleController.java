@@ -6,10 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
 
+import com.ff.model.Weather;
 import com.ff.view.TodayStyleView;
-import com.sun.xml.internal.bind.v2.runtime.RuntimeUtil.ToStringAdapter;
-
-import develop.Weather;
 
 public class TodayStyleController implements Runnable {
 	
@@ -77,7 +75,6 @@ public class TodayStyleController implements Runnable {
 	
 	public void viewShow() {
 		TodayStyleView = TodayStyleView.getInstance(seasonStyle());
-//		new Thread(this).start();
 	}
 
 	
