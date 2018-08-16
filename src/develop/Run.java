@@ -2,6 +2,8 @@ package develop;
 
 import java.util.Map;
 
+import com.ff.model.Weather;
+
 public class Run {
 
 	public static void main(String[] args) {

@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.ff.model.CommonStatic;
+import com.ff.model.Weather;
 
 public class TestLoading extends JFrame {
 

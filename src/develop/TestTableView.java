@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import com.ff.model.Weather;
+
 public class TestTableView extends JFrame{
 
 	/**
