@@ -62,15 +62,18 @@ public class MainController {
 		
 		double douNowTep = Double.parseDouble(nowTem);
 		int intNowTep = (int)douNowTep;
-		if(intNowTep >= 28){
+		if(intNowTep >= 27){
 			nowState = "더워요";
 			stateIcon = "fire";
-		}else if(intNowTep >=16 && intNowTep < 28){
+		}else if(intNowTep >=16 && intNowTep < 27){
 			nowState = "적당해요";
+			stateIcon = "smile";
 		}else if(intNowTep >= 8 && intNowTep <16){
 			nowState = "선선해요";
+			stateIcon = "wind";
 		}else if(intNowTep <8){
-			nowState = "추워요";					
+			nowState = "추워요";
+			stateIcon = "snowflake";
 		}
 		
 	}
