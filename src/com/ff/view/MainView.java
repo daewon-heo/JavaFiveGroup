@@ -304,7 +304,7 @@ public class MainView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				view1Controller = new PastWeatherController();
+				view1Controller = PastWeatherController.getInstance();
 				view1Controller.viewShow();
 			}
 		});

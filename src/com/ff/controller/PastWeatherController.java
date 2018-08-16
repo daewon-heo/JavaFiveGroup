@@ -7,35 +7,56 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ff.view.MainView;
 import com.ff.view.PastWeatherView;
 
 import develop.Weather;
 
-public class PastWeatherController {
+public class PastWeatherController implements Runnable{
 	
 	private static double temperature;
 	private static double ta;
 	private PastWeatherView view1View = null;
-	private Calendar cal = new GregorianCalendar();
-	private int year;
-	private int month;
-	private int day;
 	
-	public PastWeatherController(){
+	
+	public static PastWeatherController instance = null;
+	public static PastWeatherController getInstance(){
+		if(instance == null)
+			instance = new PastWeatherController();
+		return instance;
+	}
+	
+	private PastWeatherController(){
 		
 	}
 
 	public void viewShow() {
-		
-		view1View = new PastWeatherView();
+		view1View = PastWeatherView.getInstance();
 		//view1View.loadingView();
+//		getWeatherData();
+		new Thread(this).start();
+	}
+	
+
+	@Override
+	public void run() {
 		getWeatherData();
+		PastWeatherView.getInstance().remove(PastWeatherView.getInstance().loadingPanel);
+		PastWeatherView.getInstance().repaint();
+		PastWeatherView.getInstance().revalidate();
 		
 	}
 	
+	public void dataView(String pastIcon, String presentIcon, double temperature,  String humidity, double ta, String hm, String presentDate, String pastDate  ){
+		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm, presentDate, pastDate);
+	}
+	
 	public void getWeatherData(){
-		
+		Calendar cal = new GregorianCalendar();
 		// ================== 과거 날씨로 아이콘 가져오기
+		int year;
+		int month;
+		int day;
 		
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH) + 1;
@@ -94,7 +115,6 @@ public class PastWeatherController {
 		String pastDate = sdf.format(cal.getTime());
 		
 		view1View.detailView(pastIcon, presentIcon, temperature, humidity, ta, hm, presentDate, pastDate);
-		
 		
 	}
 	
@@ -179,5 +199,6 @@ public class PastWeatherController {
 	
 		return result;
 	}
+
 	
 }

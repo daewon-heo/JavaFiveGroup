@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -26,16 +29,40 @@ public class PastWeatherView extends JFrame {
 	 */
 	private static final long serialVersionUID = -5581181417128426852L;
 	
-	public PastWeatherView(){
+	public static PastWeatherView instance = null;
+	
+	public static JPanel loadingPanel = new JPanel();
+	
+	public static PastWeatherView getInstance(){
+		if(instance == null)
+			instance = new PastWeatherView();
+		return instance;
+	}
+		
+	private PastWeatherView(){
 		super("작년의 오늘은 어땠을까?");
     	
 		initView();
+		loadingView();
+		addListener();
 	}
 	
 	public void loadingView(){
+		ImageIcon imageIcon = new ImageIcon(CommonStatic.LOADING_IMG_WEATHER);
+		JLabel loadingLabel = new JLabel(imageIcon);
 		
-		
+		loadingPanel.add(loadingLabel);
+		loadingPanel.setLayout(new BorderLayout());
+		loadingPanel.add(loadingLabel, "Center");
+		loadingPanel.setBounds(0, 0, 700, 600);
+		loadingPanel.setOpaque(false);
+		add(loadingPanel);
     	
+    	try {
+			this.setIconImage(ImageIO.read(new File("datas/images/rainbow.png")));
+		} catch (IOException e1) {
+			System.out.println("이미지파일 오류 발생");
+		}
 //    	initView();
 	}
 	
@@ -54,6 +81,15 @@ public class PastWeatherView extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+	
+	public void addListener(){
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				instance = null;
+			}
+		});
 	}
 	
 	public void detailView(String pastIcon, String presentIcon, double temperature, String humidity, double ta, String hm, String presentDate, String pastDate){
