@@ -23,9 +23,6 @@ public class SpecificDateController implements Runnable{
 			instance = new SpecificDateController();
 		return instance;
 		
-		
-		
-		
 	}
 	
 	private SpecificDateController(){
@@ -35,14 +32,6 @@ public class SpecificDateController implements Runnable{
 	public void viewShow() {
 		specificdateView = SpecificDateView.getInstance();
 	}
-	
-	public String[][] getPastWeather(){
-		String[][] datas = {{" ",	"1월",	"2월"},
-							{"1일",	"10",	"20"},
-							{"2일",	"30","20"}};
-		return datas;
-	}
-
 	
 	@Override
 	public void run() {
@@ -58,13 +47,14 @@ public class SpecificDateController implements Runnable{
 				{"21","     강 수 량 "},
 				{"28","     적 설 량 "}
 				};
-		
 		String[] datas = new String[params.length];
 		
 		for (int i = 0; i < params.length; i++) {
-			datas[i] = Weather.GetPastWeather("108", year, params[i][0])[day][month];
+			datas[i] = Weather.GetPastWeather("108", year, params[i][0]) [day][month];
+											// 서울, 입력연도, "07 ..."
+			System.out.println("datas : "+datas[i]); 
+			// 출력값 ex) 23.7 29.2 18.9 52.4 null null
 		}
-		
 		SpecificDateView.getInstance().dataView(datas, params);
 	}
 }
