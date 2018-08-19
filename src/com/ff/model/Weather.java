@@ -43,7 +43,7 @@ public class Weather {
 
 			try {
 				final String awsApiUrl = "http://newsky2.kma.go.kr/iros/RetrieveAwsService2/getOneAwsList";
-				final String serviceKey = "mxSeDzkLZPTloPLw9fu7PD5G62hSG92WD7NKwFOIs0QnrmQCUHaFtpOTlFzVTAvZ60Efsm22b%2Fhdm9tk66TT7g%3D%3D";
+				final String serviceKey = "";	// api key 받기...
 
 				Calendar cal = new GregorianCalendar();
 				SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmm"); // 현재시간
